@@ -30,12 +30,8 @@
             android:layout_width="@dimen/four_hundred_dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-<<<<<<< HEAD
-            android:background="#FFFFFF">
-=======
             android:background="@color/transparent">
 
->>>>>>> c810953863f463e10684a064251705c2a0ee03a9
             <include layout="@layout/drawer_layout"/>
 
         </RelativeLayout>
