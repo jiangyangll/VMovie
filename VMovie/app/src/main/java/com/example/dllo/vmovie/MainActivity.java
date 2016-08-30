@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         series = (LinearLayout) findViewById(R.id.series);
         backstage = (LinearLayout) findViewById(R.id.backstage);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        drawerLayout.setAlpha(30f);
         clickDrawer = (ImageView) findViewById(R.id.click_drawerAble);
         clickSearch = (ImageView) findViewById(R.id.click_search);
 
