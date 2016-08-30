@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">VMovie</string>
+    <string name="click_to_login">点击登录</string>
+    <string name="my_subscribe">我的订阅</string>
+    <string name="my_cache">我的缓存</string>
+    <string name="my_like">我喜欢的</string>
+    <string name="text_drawer_homepage">首页</string>
+    <string name="text_drawer_series">系列</string>
+    <string name="text_drawer_behind">幕后</string>
 </resources>

@@ -5,13 +5,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import com.example.dllo.vmovie.base.BaseActivity;
 import com.example.dllo.vmovie.fragment.BackStageFragment;
@@ -22,7 +19,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private DrawerLayout drawerLayout;
     private ImageView clickDrawer, clickSearch;
-    private LinearLayout homePager, series, backstage;
+    private RelativeLayout relativeDrawer, relativeDrawerHome, relativeDrawerSeries, relativeDrawerBehind;
 
     @Override
     public int setLayout() {
@@ -31,14 +28,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initView() {
-
-        homePager = (LinearLayout) findViewById(R.id.home_page);
-        series = (LinearLayout) findViewById(R.id.series);
-        backstage = (LinearLayout) findViewById(R.id.backstage);
+        relativeDrawer = (RelativeLayout) findViewById(R.id.relative_drawer);
+        relativeDrawer.setAlpha(255);
+        relativeDrawerHome = (RelativeLayout) findViewById(R.id.relative_drawer_homepage);
+        relativeDrawerSeries = (RelativeLayout) findViewById(R.id.relative_drawer_series);
+        relativeDrawerBehind = (RelativeLayout) findViewById(R.id.relative_drawer_behind);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-        drawerLayout.setAlpha(30f);
+        drawerLayout.setAlpha(255);
         clickDrawer = (ImageView) findViewById(R.id.click_drawerAble);
         clickSearch = (ImageView) findViewById(R.id.click_search);
+        relativeDrawerHome.setOnClickListener(this);
+        relativeDrawerSeries.setOnClickListener(this);
+        relativeDrawerBehind.setOnClickListener(this);
     }
 
     @Override
@@ -58,9 +59,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         });
 
-        homePager.setOnClickListener(this);
-        series.setOnClickListener(this);
-        backstage.setOnClickListener(this);
     }
 
 
@@ -74,15 +72,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.home_page:
+            case R.id.relative_drawer_homepage:
                 replaceFragment(R.id.fragment_replace, new HomePagerFragment());
                 drawerLayout.closeDrawers();
                 break;
-            case R.id.series:
+            case R.id.relative_drawer_series:
                 replaceFragment(R.id.fragment_replace, new SeriesFragment());
                 drawerLayout.closeDrawers();
                 break;
-            case R.id.backstage:
+            case R.id.relative_drawer_behind:
                 replaceFragment(R.id.fragment_replace, new BackStageFragment());
                 drawerLayout.closeDrawers();
                 break;
