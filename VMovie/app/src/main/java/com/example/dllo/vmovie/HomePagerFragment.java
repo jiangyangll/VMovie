@@ -18,7 +18,6 @@ public class HomePagerFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
-
     }
 
     @Override
