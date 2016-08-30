@@ -1,26 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="horizontal">
+
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@android:color/black"
+    android:orientation="horizontal">
 
     <!--点击弹出drawerAble和search-->
 
     <ImageView
         android:id="@+id/click_drawerAble"
-        android:layout_width="@dimen/fifty_dp"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/ic_launcher"/>
+
+        android:layout_width="@dimen/thirty_dp"
+        android:layout_height="@dimen/thirty_dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:background="@mipmap/home_side" />
+
 
     <TextView
         android:layout_width="@dimen/zero_dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <ImageView
         android:id="@+id/click_search"
-        android:layout_width="@dimen/fifty_dp"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/ic_launcher"/>
+        android:layout_width="@dimen/thirty_dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="10dp"
+        android:background="@mipmap/home_search" />
 
 </LinearLayout>
