@@ -12,11 +12,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import android.widget.RelativeLayout;
-<<<<<<< HEAD
-
-=======
->>>>>>> 444990424ee6762efe651818c918d500f8ec0239
-
 import com.example.dllo.vmovie.base.BaseActivity;
 import com.example.dllo.vmovie.backstage.fragment.BackStageFragment;
 

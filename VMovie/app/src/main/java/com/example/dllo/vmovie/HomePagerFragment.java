@@ -55,20 +55,14 @@ public class HomePagerFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
-<<<<<<< HEAD
-    }
-=======
+
 
         //初始化TextView
         initTextView(view);
-
         //初始化ImageView
         initImageView(view);
->>>>>>> 444990424ee6762efe651818c918d500f8ec0239
-
         //初始化Fragment
         initFragment();
-
         //初始化ViewPager
         initViewPager(view);
     }
