@@ -63,10 +63,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         WindowManager windowManager = this.getWindowManager();
         int drawerWidth = windowManager.getDefaultDisplay().getWidth();
         int drawerHeight = windowManager.getDefaultDisplay().getHeight();
-        ViewGroup.LayoutParams params = drawerLayout.getLayoutParams();
+        ViewGroup.LayoutParams params = relativeDrawer.getLayoutParams();
         params.width = drawerWidth;
         params.height = drawerHeight;
-        drawerLayout.setLayoutParams(params);
+        relativeDrawer.setLayoutParams(params);
 
     }
 
