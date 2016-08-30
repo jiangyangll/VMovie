@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-              android:background="@android:color/holo_red_light"
     tools:context="com.example.dllo.vmovie.MainActivity">
 
     <android.support.v4.widget.DrawerLayout
@@ -20,7 +19,7 @@
             <FrameLayout
                 android:id="@+id/fragment_replace"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent">
 
                 <include layout="@layout/click_drawerable_search" />
 
@@ -31,15 +30,13 @@
             android:id="@+id/relative_drawer"
             android:layout_width="@dimen/four_hundred_dp"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
-            >
+            android:layout_gravity="start">
 
-            <include layout="@layout/drawer_layout"/>
+            <include layout="@layout/drawer_layout" />
 
         </RelativeLayout>
 
     </android.support.v4.widget.DrawerLayout>
-
 
 
 </LinearLayout>

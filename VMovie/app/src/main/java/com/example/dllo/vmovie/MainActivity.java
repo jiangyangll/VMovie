@@ -40,6 +40,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         relativeDrawerHome.setOnClickListener(this);
         relativeDrawerSeries.setOnClickListener(this);
         relativeDrawerBehind.setOnClickListener(this);
+
+        replaceFragment(R.id.fragment_replace,new HomePagerFragment());
     }
 
     @Override
