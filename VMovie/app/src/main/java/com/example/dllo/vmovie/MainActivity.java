@@ -13,28 +13,36 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.dllo.vmovie.base.BaseActivity;
 import com.example.dllo.vmovie.fragment.BackStageFragment;
 import com.example.dllo.vmovie.fragment.HomePagerFragment;
 import com.example.dllo.vmovie.fragment.SeriesFragment;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private DrawerLayout drawerLayout;
     private ImageView clickDrawer, clickSearch;
     private LinearLayout homePager, series, backstage;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public int setLayout() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void initView() {
 
         homePager = (LinearLayout) findViewById(R.id.home_page);
         series = (LinearLayout) findViewById(R.id.series);
         backstage = (LinearLayout) findViewById(R.id.backstage);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        drawerLayout.setAlpha(30f);
         clickDrawer = (ImageView) findViewById(R.id.click_drawerAble);
         clickSearch = (ImageView) findViewById(R.id.click_search);
+    }
 
+    @Override
+    protected void initData() {
         clickDrawer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         backstage.setOnClickListener(this);
     }
 
+
     public void replaceFragment(int id, Fragment fragment) {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
@@ -74,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 drawerLayout.closeDrawers();
                 break;
             case R.id.backstage:
-                replaceFragment(R.id.fragment_replace,new BackStageFragment());
+                replaceFragment(R.id.fragment_replace, new BackStageFragment());
                 drawerLayout.closeDrawers();
                 break;
         }
