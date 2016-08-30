@@ -10,11 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
-<<<<<<< HEAD
-import android.widget.LinearLayout;
-=======
+
 import android.widget.RelativeLayout;
->>>>>>> dbca806fc1cc6a0711e9cfc35b42d1766275269a
 
 import com.example.dllo.vmovie.base.BaseActivity;
 import com.example.dllo.vmovie.backstage.fragment.BackStageFragment;
@@ -69,6 +66,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         params.width = drawerWidth;
         params.height = drawerHeight;
         relativeDrawer.setLayoutParams(params);
+
+        replaceFragment(R.id.fragment_replace,new HomePagerFragment());
 
     }
 

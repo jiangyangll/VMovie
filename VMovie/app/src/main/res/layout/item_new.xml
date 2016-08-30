@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/new_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/new_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="140dp"
+                android:text="title"
+                android:textStyle="bold"
+                android:typeface="sans"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/new_cateName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:text="catename"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/new_slash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/new_cateName"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/new_cateName"
+                android:text="/"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/new_publishTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/new_slash"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/new_slash"
+                android:text="publish_time"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+
+</RelativeLayout>
