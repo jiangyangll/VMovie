@@ -5,18 +5,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.dllo.vmovie.base.BaseActivity;
-import com.example.dllo.vmovie.fragment.BackStageFragment;
-import com.example.dllo.vmovie.fragment.HomePagerFragment;
-import com.example.dllo.vmovie.fragment.SeriesFragment;
+import com.example.dllo.vmovie.backstage.fragment.BackStageFragment;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 

@@ -1,4 +1,4 @@
-package com.example.dllo.vmovie.fragment;
+package com.example.dllo.vmovie;
 
 import android.view.View;
 

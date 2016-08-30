@@ -19,7 +19,8 @@ public class NetUtil {
     //系列
     public static final String SERIES_START = "http://app.vmoiver.com/apiv3/series/getList?page=1&size=10&p=1";
     //幕后标题
-    public static final String BACKSTAGE = "http://app.vmoiver.com/apiv3/backstage/getCate";
+    public static final String BACKSTAGE
+            = "http://app.vmoiver.com/apiv3/backstage/getCate";
     //幕后每一个fragment的前半部分 然后再拼接id
     /**
      * p=1&size=10&cateid=2   //全部
