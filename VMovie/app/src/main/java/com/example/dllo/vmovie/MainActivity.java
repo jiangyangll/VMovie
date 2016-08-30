@@ -10,12 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+
 import android.widget.RelativeLayout;
 
 import com.example.dllo.vmovie.base.BaseActivity;
-import com.example.dllo.vmovie.fragment.BackStageFragment;
-import com.example.dllo.vmovie.fragment.HomePagerFragment;
-import com.example.dllo.vmovie.fragment.SeriesFragment;
+import com.example.dllo.vmovie.backstage.fragment.BackStageFragment;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 

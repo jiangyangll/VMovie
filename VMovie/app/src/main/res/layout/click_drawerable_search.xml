@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:background="@android:color/black"
@@ -9,11 +10,13 @@
 
     <ImageView
         android:id="@+id/click_drawerAble"
+
         android:layout_width="@dimen/thirty_dp"
         android:layout_height="@dimen/thirty_dp"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/ten_dp"
         android:background="@mipmap/home_side" />
+
 
     <TextView
         android:layout_width="@dimen/zero_dp"

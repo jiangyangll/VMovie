@@ -8,7 +8,6 @@ import com.example.dllo.vmovie.base.BaseActivity;
 public class SearchActivity extends BaseActivity{
 
     //搜索
-
     @Override
     public int setLayout() {
         return R.layout.activity_search;
