@@ -31,7 +31,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:background="#FFFFFF">
-
             <include layout="@layout/drawer_layout"/>
 
         </RelativeLayout>

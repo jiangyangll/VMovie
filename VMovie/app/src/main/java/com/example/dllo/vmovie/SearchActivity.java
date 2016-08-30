@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 public class SearchActivity extends AppCompatActivity{
 
     //搜索
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
