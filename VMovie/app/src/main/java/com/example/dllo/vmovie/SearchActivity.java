@@ -1,9 +1,5 @@
 package com.example.dllo.vmovie;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-
 import com.example.dllo.vmovie.base.BaseActivity;
 
 /**
