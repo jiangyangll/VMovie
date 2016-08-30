@@ -75,6 +75,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.backstage:
                 replaceFragment(R.id.fragment_replace,new BackStageFragment());
+                drawerLayout.closeDrawers();
+                break;
         }
     }
 
