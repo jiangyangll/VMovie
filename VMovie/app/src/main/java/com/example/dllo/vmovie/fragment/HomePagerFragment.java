@@ -11,7 +11,6 @@ import com.example.dllo.vmovie.base.BaseFragment;
 public class HomePagerFragment extends BaseFragment {
 
     //首页
-
     @Override
     protected int setLayout() {
         return R.layout.fragment_homepager;
