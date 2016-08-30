@@ -8,18 +8,18 @@
     <ImageView
         android:id="@+id/click_drawerAble"
         android:background="@mipmap/ic_launcher"
-        android:layout_width="50dp"
+        android:layout_width="@dimen/fifty_dp"
         android:layout_height="wrap_content" />
 
     <TextView
         android:layout_weight="1"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/zero_dp"
         android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/click_search"
         android:background="@mipmap/ic_launcher"
-        android:layout_width="50dp"
+        android:layout_width="@dimen/fifty_dp"
         android:layout_height="wrap_content" />
 
 </LinearLayout>
