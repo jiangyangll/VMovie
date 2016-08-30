@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -60,6 +62,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 startActivity(intent);
             }
         });
+        WindowManager windowManager = this.getWindowManager();
+        int drawerWidth = windowManager.getDefaultDisplay().getWidth();
+        int drawerHeight = windowManager.getDefaultDisplay().getHeight();
+        ViewGroup.LayoutParams params = drawerLayout.getLayoutParams();
+        params.width = drawerWidth;
+        params.height = drawerHeight;
+        drawerLayout.setLayoutParams(params);
 
     }
 
