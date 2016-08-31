@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="@dimen/two_hundred_dp"
     android:orientation="vertical">
 
     <ImageView
@@ -22,21 +22,21 @@
                 android:id="@+id/new_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="140dp"
+                android:layout_marginLeft="@dimen/ten_dp"
+                android:layout_marginTop="@dimen/one_hundred_forty_dp"
                 android:text="title"
                 android:textStyle="bold"
                 android:typeface="sans"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="@dimen/sixteen_sp" />
 
             <TextView
                 android:id="@+id/new_cateName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="15dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="@dimen/fifteen_dp"
+                android:layout_marginLeft="@dimen/ten_dp"
                 android:text="catename"
                 android:textColor="@color/white" />
 
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/new_cateName"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="@dimen/five_dp"
                 android:layout_toRightOf="@id/new_cateName"
                 android:text="/"
                 android:textColor="@color/white" />
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/new_slash"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="@dimen/five_dp"
                 android:layout_toRightOf="@id/new_slash"
                 android:text="publish_time"
                 android:textColor="@color/white" />

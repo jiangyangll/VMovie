@@ -6,30 +6,29 @@
     <ImageView
         android:scaleType="fitXY"
         android:id="@+id/image"
-        android:layout_width="140dp"
-        android:layout_height="80dp"
-        android:layout_margin="5dp"
-        android:background="@mipmap/ic_launcher"/>
+        android:layout_width="@dimen/one_hundred_forty_dp"
+        android:layout_height="@dimen/eighty_dp"
+        android:layout_margin="@dimen/five_dp"
+        />
 
     <TextView
-        android:textColor="#010101"
+        android:textColor="@android:color/black"
         android:maxLines="2"
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
+        android:layout_marginTop="@dimen/fifteen_dp"
+        android:layout_marginLeft="@dimen/fifteen_dp"
         android:layout_toRightOf="@+id/image"
-        android:text="干货"
-        android:textSize="15sp"/>
+        android:textSize="@dimen/fifteen_sp"/>
 
     <ImageView
         android:id="@+id/image_share"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="@dimen/fifteen_dp"
+        android:layout_height="@dimen/fifteen_dp"
         android:layout_alignLeft="@+id/tv_title"
         android:layout_below="@+id/tv_title"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/ten_dp"
         android:background="@mipmap/black_share_icon"/>
 
     <TextView
@@ -38,15 +37,14 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/image_share"
         android:layout_toRightOf="@+id/image_share"
-        android:text="100"
-        android:textSize="10sp"/>
+        android:textSize="@dimen/ten_sp"/>
 
     <ImageView
         android:id="@+id/image_like"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="@dimen/fifteen_dp"
+        android:layout_height="@dimen/fifteen_dp"
         android:layout_alignTop="@+id/image_share"
-        android:layout_marginLeft="40dp"
+        android:layout_marginLeft="@dimen/forty_dp"
         android:layout_toRightOf="@+id/tv_share_num"
         android:background="@mipmap/home_like"/>
 
@@ -56,7 +54,6 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/image_like"
         android:layout_toRightOf="@+id/image_like"
-        android:text="0"
-        android:textSize="10sp"/>
+        android:textSize="@dimen/ten_sp"/>
 
 </RelativeLayout>
