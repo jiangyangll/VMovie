@@ -1,10 +1,14 @@
 package com.example.dllo.vmovie.backstage.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.example.dllo.vmovie.R;
+import com.example.dllo.vmovie.backstage.activity.AllDetailActivity;
 import com.example.dllo.vmovie.backstage.adapter.AllAdapter;
 import com.example.dllo.vmovie.backstage.adapter.BackStageTitleAdapter;
 import com.example.dllo.vmovie.backstage.bean.AllBean;
@@ -37,11 +41,20 @@ public class AllFragment extends BaseFragment {
     @Override
     protected void initData() {
         mAllAdapter = new AllAdapter(getContext());
-        NetTool.getInstance().startRequest(NetUtil.T_BACKSTAGE_EVERY + 1 + NetUtil.BACKSTAGE_EVERY_SIZE + 10 + NetUtil.BACKSTAGE_EVERY_ID + BackStageTitleAdapter.getId(getPosition()), AllBean.class, new OnHttpCallBack<AllBean>() {
+        NetTool.getInstance().startRequest(NetUtil.T_BACKSTAGE_EVERY + 1 + NetUtil.BACKSTAGE_EVERY_SIZE + 10 + NetUtil.BACKSTAGE_EVERY_ID + BackStageTitleAdapter.getCateId(getPosition()), AllBean.class, new OnHttpCallBack<AllBean>() {
             @Override
-            public void onSuccess(AllBean response) {
+            public void onSuccess(final AllBean response) {
                 mAllAdapter.setAllBean(response);
                 mListView.setAdapter(mAllAdapter);
+                mListView.setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent(getActivity(), AllDetailActivity.class);
+                        String oldId = response.getData().get(position).getPostid();
+                        intent.putExtra("id",oldId);
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override
@@ -49,6 +62,7 @@ public class AllFragment extends BaseFragment {
             }
         });
     }
+
     private int getPosition() {
         int position;
         Bundle args = getArguments();

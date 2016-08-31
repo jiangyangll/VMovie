@@ -13,8 +13,8 @@ public class SearchActivity extends BaseActivity{
         return R.layout.activity_search;
     }
 
-    @Override
-    protected void initView() {
+    @Override    protected void initView() {
+
 
     }
 

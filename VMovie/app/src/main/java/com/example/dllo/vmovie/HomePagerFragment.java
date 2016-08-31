@@ -10,7 +10,6 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.dllo.vmovie.R;
 import com.example.dllo.vmovie.base.BaseFragment;
 import com.example.dllo.vmovie.home.ChannelFragment;
 import com.example.dllo.vmovie.home.HomeFragmentPagerAdapter;
@@ -55,8 +54,6 @@ public class HomePagerFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
-
-
         //初始化TextView
         initTextView(view);
         //初始化ImageView
@@ -66,6 +63,7 @@ public class HomePagerFragment extends BaseFragment {
         //初始化ViewPager
         initViewPager(view);
     }
+
     @Override
     protected void initData() {
 
