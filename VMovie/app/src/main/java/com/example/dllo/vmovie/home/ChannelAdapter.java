@@ -41,8 +41,8 @@ public class ChannelAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ChannelHolder channelHolder = (ChannelHolder) holder;
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+        final ChannelHolder channelHolder = (ChannelHolder) holder;
 
         if (position == 0) {
             channelHolder.cateNameShow.setText("热门");
@@ -55,6 +55,18 @@ public class ChannelAdapter extends RecyclerView.Adapter {
         } else {
             channelHolder.cateNameShow.setText(bean.getData().get(position - 2).getCatename());
             Glide.with(context).load(bean.getData().get(position - 2).getIcon()).into(channelHolder.imageView);
+        }
+
+        if (listener != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    int clickPosition = channelHolder.getAdapterPosition();
+
+                    listener.onItemClick(v, channelHolder, clickPosition);
+                }
+            });
         }
     }
 

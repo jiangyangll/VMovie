@@ -16,20 +16,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by dllo on 16/8/30.
+ * Created by dllo on 16/8/31.
  */
-public class NewAdapter extends RecyclerView.Adapter {
+public class ChannelDetailAdapter extends RecyclerView.Adapter {
 
-    //首页-最新
-    private NewBean bean;
+    //首页-频道-点击进入各个专题
+    private ChannelDetailBean bean;
     private Context context;
     private OnRecyclerItemClickListener listener;
 
-    public NewAdapter(Context context) {
+    public ChannelDetailAdapter(Context context) {
         this.context = context;
     }
 
-    public void setBean(NewBean bean) {
+    public void setBean(ChannelDetailBean bean) {
         this.bean = bean;
         notifyDataSetChanged();
     }
@@ -40,34 +40,34 @@ public class NewAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new NewHolder(LayoutInflater.from(context).inflate(R.layout.item_new,parent,false));
+        return new ChannelDetailHolder(LayoutInflater.from(context).inflate(R.layout.item_channel_detail,parent,false));
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        final NewHolder newHolder = (NewHolder) holder;
-        newHolder.titleShow.setText(bean.getData().get(position).getTitle());
-        newHolder.cateNameShow.setText(bean.getData().get(position).getCates().get(0).getCatename());
+        final ChannelDetailHolder detailHolder = (ChannelDetailHolder) holder;
+        detailHolder.titleShow.setText(bean.getData().get(position).getTitle());
+        detailHolder.cateNameShow.setText(bean.getData().get(position).getCates().get(0).getCatename());
 
-        //处理
+        //处理时间
         String publish = bean.getData().get(position).getDuration();
+
         int a = Integer.valueOf(publish);
-//        Date date = new Date(1472141100000L);
         Date date = new Date(a * 1000L);
         DateFormat format = new SimpleDateFormat("mm′ss″");
         String time = format.format(date);
-        newHolder.publishTimeShow.setText(time);
+        detailHolder.duration.setText(time);
 
-        Glide.with(context).load(bean.getData().get(position).getImage()).into(newHolder.imageView);
+        Glide.with(context).load(bean.getData().get(position).getImage()).into(detailHolder.imageView);
 
         if (listener != null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    int clickPosition = newHolder.getAdapterPosition();
+                    int clickPosition = detailHolder.getAdapterPosition();
 
-                    listener.onItemClick(v,newHolder,clickPosition);
+                    listener.onItemClick(v,detailHolder,clickPosition);
                 }
             });
         }
@@ -78,22 +78,20 @@ public class NewAdapter extends RecyclerView.Adapter {
         return bean.getData().size();
     }
 
-    public class NewHolder extends RecyclerView.ViewHolder {
-        private TextView titleShow, cateNameShow, publishTimeShow;
+    public class ChannelDetailHolder extends RecyclerView.ViewHolder {
+        private TextView titleShow, cateNameShow, duration;
         private ImageView imageView;
 
-        public NewHolder(View itemView) {
+        public ChannelDetailHolder(View itemView) {
             super(itemView);
-            titleShow = (TextView) itemView.findViewById(R.id.new_title);
-            cateNameShow = (TextView) itemView.findViewById(R.id.new_cateName);
-            publishTimeShow = (TextView) itemView.findViewById(R.id.new_publishTime);
-            imageView = (ImageView) itemView.findViewById(R.id.new_image);
+            titleShow = (TextView) itemView.findViewById(R.id.item_channel_detail_title);
+            cateNameShow = (TextView) itemView.findViewById(R.id.item_channel_detail_cateName);
+            duration = (TextView) itemView.findViewById(R.id.item_channel_detail_duration);
+            imageView = (ImageView) itemView.findViewById(R.id.item_channel_detail_image);
         }
     }
 
     public interface OnRecyclerItemClickListener{
-        void onItemClick(View view, NewHolder newHolder, int position);
+        void onItemClick(View view, ChannelDetailHolder detailHolder, int position);
     }
-
-
 }

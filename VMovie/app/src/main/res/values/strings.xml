@@ -7,4 +7,7 @@
     <string name="text_drawer_homepage">首页</string>
     <string name="text_drawer_series">系列</string>
     <string name="text_drawer_behind">幕后</string>
+    <string name="series">系列</string>
+    <string name="backstage">幕后文章</string>
+    <string name="last_new">最新</string>
 </resources>

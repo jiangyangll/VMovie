@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/two_hundred_dp"
-    android:orientation="vertical">
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="@dimen/two_hundred_dp">
 
     <ImageView
-        android:id="@+id/new_image"
+        android:id="@+id/item_channel_detail_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY" />
@@ -19,7 +18,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/new_title"
+                android:id="@+id/item_channel_detail_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/ten_dp"
@@ -31,7 +30,7 @@
                 android:textSize="@dimen/sixteen_sp" />
 
             <TextView
-                android:id="@+id/new_cateName"
+                android:id="@+id/item_channel_detail_cateName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -41,28 +40,26 @@
                 android:textColor="@color/white" />
 
             <TextView
-                android:id="@+id/new_slash"
+                android:id="@+id/item_channel_detail_slash"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/new_cateName"
+                android:layout_alignTop="@id/item_channel_detail_cateName"
                 android:layout_marginLeft="@dimen/five_dp"
-                android:layout_toRightOf="@id/new_cateName"
+                android:layout_toRightOf="@id/item_channel_detail_cateName"
                 android:text="/"
                 android:textColor="@color/white" />
 
             <TextView
-                android:id="@+id/new_publishTime"
+                android:id="@+id/item_channel_detail_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/new_slash"
+                android:layout_alignTop="@id/item_channel_detail_slash"
                 android:layout_marginLeft="@dimen/five_dp"
-                android:layout_toRightOf="@id/new_slash"
-                android:text="publish_time"
+                android:layout_toRightOf="@id/item_channel_detail_slash"
+                android:text="duration"
                 android:textColor="@color/white" />
 
         </RelativeLayout>
 
     </FrameLayout>
-
-
 </RelativeLayout>
