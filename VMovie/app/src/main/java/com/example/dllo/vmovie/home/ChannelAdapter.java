@@ -17,7 +17,7 @@ import com.example.dllo.vmovie.netutil.NetUtil;
  */
 public class ChannelAdapter extends RecyclerView.Adapter {
 
-    //首页-最新
+    //首页-频道
     private ChannelBean bean;
     private Context context;
     private OnRecyclerItemClickListener listener;

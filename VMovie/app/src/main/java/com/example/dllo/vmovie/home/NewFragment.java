@@ -35,7 +35,7 @@ public class NewFragment extends BaseFragment {
         manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         adapter = new NewAdapter(getContext());
-
+        
         NetTool.getInstance().startRequest(NetUtil.NEWEST, NewBean.class, new OnHttpCallBack<NewBean>() {
             @Override
             public void onSuccess(NewBean response) {
