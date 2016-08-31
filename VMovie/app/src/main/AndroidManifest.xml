@@ -21,6 +21,7 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".home.ChannelDetailActivity"/>
         <activity android:name=".home.ChannelContentActivity"/>
+        <activity android:name=".backstage.activity.AllDetailActivity"/>
     </application>
 
 </manifest>

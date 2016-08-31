@@ -36,7 +36,9 @@ public class BackStageFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+        //Fragment管理Fragment的时候,使用getChildFragmentManager()
         mTitleAdapter = new BackStageTitleAdapter(getChildFragmentManager());
+        //用OK解析标题
         NetTool.getInstance().startRequest(NetUtil.BACKSTAGE, BackStageTitleBean.class, new OnHttpCallBack<BackStageTitleBean>() {
             @Override
             public void onSuccess(BackStageTitleBean response) {

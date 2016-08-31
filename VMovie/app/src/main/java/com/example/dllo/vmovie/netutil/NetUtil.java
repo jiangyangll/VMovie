@@ -67,7 +67,7 @@ public class NetUtil {
     public static final String VIDEO_LEFT = "http://app.vmoiver.com/apiv3/series/getVideo?series_postid=";
     public static final String VIDEO_RIGHT = "&p=1";
 
-    //最新详情   频道中video也可通过拼接postid实现加载数据
+    //最新详情  频道中video也可通过拼接postid实现加载数据
     //http://app.vmoiver.com/apiv3/post/view?postid=49595
     //http://app.vmoiver.com/apiv3/post/view?postid=49595&p=1
     public static final String NEWEST_DETAIL_LEFT = "http://app.vmoiver.com/apiv3/post/view?postid=";
@@ -77,7 +77,7 @@ public class NetUtil {
     public static final String SERIES_DETAIL_LEFT = "http://app.vmoiver.com/apiv3/series/view?seriesid=";
     public static final String SERIES_DETAIL_RIGHT = "&p=1";
 
-    //    String url = "http://app.vmoiver.com/" + id + "?qingapp=app_new&v=android_5.0.4";
+    //String url = "http://app.vmoiver.com/" + id + "?qingapp=app_new&v=android_5.0.4";
     //网页
     //http://app.vmoiver.com/49595?qingapp=app_new
     public static final String WEB_LEFT = "http://app.vmoiver.com/";

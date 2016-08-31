@@ -12,7 +12,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import android.widget.RelativeLayout;
-
 import com.example.dllo.vmovie.base.BaseActivity;
 import com.example.dllo.vmovie.backstage.fragment.BackStageFragment;
 import com.example.dllo.vmovie.series.SeriesFragment;

@@ -16,7 +16,6 @@ import java.util.ArrayList;
  */
 public class BackStageTitleAdapter extends FragmentPagerAdapter {
     private static BackStageTitleBean mTitleBean;
-    private ArrayList<Fragment> mFragments;
     private ArrayList<String> titles;
 
     public BackStageTitleAdapter(FragmentManager fm) {
@@ -30,14 +29,6 @@ public class BackStageTitleAdapter extends FragmentPagerAdapter {
             titles.add(mTitleBean.getData().get(i).getCatename());
         }
         notifyDataSetChanged();
-    }
-
-    public void setFragments(ArrayList<Fragment> fragments) {
-        mFragments = fragments;
-    }
-
-    public void setTitles(ArrayList<String> titles) {
-        this.titles = titles;
     }
 
     @Override
@@ -59,7 +50,7 @@ public class BackStageTitleAdapter extends FragmentPagerAdapter {
         return titles.get(position);
     }
 
-    public static String getId(int position){
+    public static String getCateId(int position){
         String id = mTitleBean.getData().get(position).getCateid();
         return id;
     }
