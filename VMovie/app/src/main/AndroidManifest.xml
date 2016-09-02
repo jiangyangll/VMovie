@@ -22,7 +22,11 @@
         <activity android:name=".home.ChannelDetailActivity"/>
         <activity android:name=".home.ChannelContentActivity"/>
         <activity android:name=".backstage.activity.AllDetailActivity"/>
+
         <activity android:name=".backstage.activity.CommentDetailActivity"/>
+
+        <activity android:name=".series.SeriesDesActivity"/>
+
     </application>
 
 </manifest>
