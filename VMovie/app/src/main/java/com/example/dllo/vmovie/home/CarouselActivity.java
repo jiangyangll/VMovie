@@ -10,8 +10,6 @@ import com.example.dllo.vmovie.R;
 import com.example.dllo.vmovie.base.BaseActivity;
 import com.example.dllo.vmovie.netutil.NetUtil;
 
-import java.util.ArrayList;
-
 /**
  * Created by dllo on 16/9/2.
  */
