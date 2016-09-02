@@ -190,6 +190,10 @@
                     android:layout_height="match_parent"
                     />
             </LinearLayout>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager_series_description_video_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
     </ScrollView>
