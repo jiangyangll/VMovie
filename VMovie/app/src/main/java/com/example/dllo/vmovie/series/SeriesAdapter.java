@@ -1,10 +1,12 @@
 package com.example.dllo.vmovie.series;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,12 +39,20 @@ public class SeriesAdapter extends Adapter<SeriesHolder>{
     }
 
     @Override
-    public void onBindViewHolder(SeriesHolder holder, int position) {
+    public void onBindViewHolder(SeriesHolder holder, final int position) {
         holder.tvTitle.setText(seriesBean.getData().get(position).getTitle());
         holder.tvDes.setText("已更新至" + seriesBean.getData().get(position).getUpdate_to() + "集"
         + "     " + seriesBean.getData().get(position).getFollower_num() + "人已订阅");
         holder.tvContent.setText(seriesBean.getData().get(position).getContent());
         Glide.with(context).load(seriesBean.getData().get(position).getImage()).into(holder.ivShow);
+        holder.ivShow.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,SeriesDesActivity.class);
+                intent.putExtra("seriesId",seriesBean.getData().get(position).getSeriesid());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
