@@ -10,5 +10,10 @@
     <string name="series">系列</string>
     <string name="backstage">幕后文章</string>
     <string name="last_new">最新</string>
+
+    <string name="cache">缓存</string>
+    <string name="say_something">我来说两句...</string>
+
     <string name="check_al">查看全部</string>
+
 </resources>

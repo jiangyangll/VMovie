@@ -2,7 +2,10 @@ package com.example.dllo.vmovie.backstage.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -45,7 +48,13 @@ public class AllFragment extends BaseFragment {
             @Override
             public void onSuccess(final AllBean response) {
                 mAllAdapter.setAllBean(response);
+                Log.d("AllFragment", "response:" + response);
                 mListView.setAdapter(mAllAdapter);
+                //添加布局动画
+                LayoutAnimationController lac = new LayoutAnimationController(AnimationUtils.loadAnimation(getActivity(),R.anim.enter_anim));
+                lac.setOrder(LayoutAnimationController.ORDER_NORMAL);
+                mListView.setLayoutAnimation(lac);
+                mListView.startLayoutAnimation();
                 mListView.setOnItemClickListener(new OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

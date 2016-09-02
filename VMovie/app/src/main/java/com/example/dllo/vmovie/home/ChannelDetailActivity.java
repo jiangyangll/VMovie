@@ -56,7 +56,7 @@ public class ChannelDetailActivity extends BaseActivity {
 
         NetTool.getInstance().startRequest(url, ChannelDetailBean.class, new OnHttpCallBack<ChannelDetailBean>() {
             @Override
-            public void onSuccess(ChannelDetailBean response) {
+            public void onSuccess(final ChannelDetailBean response) {
                 adapter.setBean(response);
                 recyclerView.setAdapter(adapter);
 
@@ -64,15 +64,16 @@ public class ChannelDetailActivity extends BaseActivity {
                     @Override
                     public void onItemClick(View view, ChannelDetailAdapter.ChannelDetailHolder detailHolder, int position) {
                         Intent skipIntent = new Intent(ChannelDetailActivity.this,ChannelContentActivity.class);
+                        skipIntent.putExtra("postId",response.getData().get(position).getPostid());
+                        skipIntent.putExtra("shareNumber",response.getData().get(position).getShare_num());
+                        skipIntent.putExtra("likeNumber",response.getData().get(position).getLike_num());
                         startActivity(skipIntent);
                     }
                 });
-
             }
 
             @Override
             public void onError(Throwable e) {
-
             }
         });
 
