@@ -1,11 +1,13 @@
 package com.example.dllo.vmovie.home;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.VideoView;
 
 import com.example.dllo.vmovie.R;
 import com.example.dllo.vmovie.base.BaseFragment;
@@ -58,11 +60,10 @@ public class NewFragment extends BaseFragment {
         customViews = getViews(6);
         customBanner.setViews(customViews);
 
-        NetTool.getInstance().startRequest("http://app.vmoiver.com/apiv3/index/getBanner", CarouselBean.class, new OnHttpCallBack<CarouselBean>() {
+        NetTool.getInstance().startRequest(NetUtil.NEWEST_RECYCLER, CarouselBean.class, new OnHttpCallBack<CarouselBean>() {
             @Override
             public void onSuccess(CarouselBean response) {
                 for (int i = 0; i < response.getData().size(); i++) {
-                    Log.d("MainActivity", response.getData().get(i).getImage());
                     SimpleDraweeView simpleDraweeView;
                     simpleDraweeView = (SimpleDraweeView) customViews.get(i);
                     simpleDraweeView.setImageURI(Uri.parse(response.getData().get(i).getImage()));
@@ -76,14 +77,22 @@ public class NewFragment extends BaseFragment {
 
         NetTool.getInstance().startRequest(NetUtil.NEWEST, NewBean.class, new OnHttpCallBack<NewBean>() {
             @Override
-            public void onSuccess(NewBean response) {
+            public void onSuccess(final NewBean response) {
                 adapter.setBean(response);
                 recyclerView.setAdapter(adapter);
+
+                adapter.setListener(new NewAdapter.OnRecyclerItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, NewAdapter.NewHolder newHolder, int position) {
+                        Intent intent = new Intent(getContext(),NewDetail.class);
+                        intent.putExtra("postId",response.getData().get(position - 1).getPostid());
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override
             public void onError(Throwable e) {
-
             }
         });
 

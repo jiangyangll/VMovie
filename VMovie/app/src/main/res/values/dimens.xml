@@ -27,4 +27,10 @@
     <dimen name="eighty_dp">80dp</dimen>
     <dimen name="fifty_five_dp">55dp</dimen>
     <dimen name="twenty_three_sp">23sp</dimen>
+    <dimen name="twenty_dp">20dp</dimen>
+    <dimen name="seventeen_dp">17dp</dimen>
+    <dimen name="twelve_sp">12sp</dimen>
+    <dimen name="sixty_dp">60dp</dimen>
+    <dimen name="eight_dp">8dp</dimen>
+    <dimen name="two_hundred_three_dp">203dp</dimen>
 </resources>
