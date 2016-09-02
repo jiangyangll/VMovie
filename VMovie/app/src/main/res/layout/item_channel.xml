@@ -10,6 +10,7 @@
         android:layout_height="wrap_content" />
 
     <FrameLayout
+        android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -25,7 +26,6 @@
                 android:text="#"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/twenty_sp" />
-
 
             <TextView
                 android:id="@+id/channel_cateName"

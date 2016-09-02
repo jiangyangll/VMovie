@@ -22,13 +22,13 @@
             android:background="@mipmap/video_lan_back" />
 
         <ImageView
-            android:id="@+id/channel_content_video_img_cache"
+            android:id="@+id/channel_content_video_img_share"
             android:layout_width="@dimen/thirty_dp"
             android:layout_height="@dimen/thirty_dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/ten_dp"
             android:layout_marginTop="@dimen/ten_dp"
-            android:background="@mipmap/video_lan_download" />
+            android:background="@mipmap/gray_share_icon" />
     </RelativeLayout>
 
     <WebView

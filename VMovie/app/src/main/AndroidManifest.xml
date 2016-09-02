@@ -38,7 +38,7 @@
         <activity android:name=".home.ChannelComment" />
         <activity android:name=".home.NewComment" />
         <activity android:name=".home.NewDetail" />
-
+        <activity android:name=".home.CarouselActivity"/>
         <activity android:name=".backstage.activity.CommentDetailActivity"/>
 
         <activity android:name=".series.SeriesDesActivity"/>
