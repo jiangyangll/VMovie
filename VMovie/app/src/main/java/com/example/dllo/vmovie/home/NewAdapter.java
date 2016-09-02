@@ -50,6 +50,7 @@ public class NewAdapter extends RecyclerView.Adapter {
         newHolder.cateNameShow.setText(bean.getData().get(position).getCates().get(0).getCatename());
 
         //处理
+
         String publish = bean.getData().get(position).getDuration();
         int a = Integer.valueOf(publish);
 //        Date date = new Date(1472141100000L);
@@ -94,6 +95,4 @@ public class NewAdapter extends RecyclerView.Adapter {
     public interface OnRecyclerItemClickListener{
         void onItemClick(View view, NewHolder newHolder, int position);
     }
-
-
 }

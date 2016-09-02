@@ -223,3 +223,4 @@ public class HomePagerFragment extends BaseFragment {
         channelTv.setTextColor(getResources().getColor(R.color.white));
     }
 }
+

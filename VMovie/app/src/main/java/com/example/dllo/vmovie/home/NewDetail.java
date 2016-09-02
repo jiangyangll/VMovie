@@ -28,7 +28,7 @@ public class NewDetail extends BaseActivity {
     //首页-最新-详情
     private WebView webView;
     private TextView like, share, comment;
-    private ImageView likeImage, shareImage, commentImage, cacheImage, videoBackImg, videoCacheImg;
+    private ImageView likeImage, shareImage, commentImage, cacheImage, videoBackImg, videoShareImg;
     private VideoView videoView;
 
     @Override
@@ -49,7 +49,7 @@ public class NewDetail extends BaseActivity {
         commentImage = (ImageView) findViewById(R.id.new_detail_img_comment);
         cacheImage = (ImageView) findViewById(R.id.new_detail_img_cache);
         videoBackImg = (ImageView) findViewById(R.id.new_detail_video_img_back);
-        videoCacheImg = (ImageView) findViewById(R.id.new_detail_video_img_cache);
+        videoShareImg = (ImageView) findViewById(R.id.new_detail_video_img_share);
         videoView = (VideoView) findViewById(R.id.new_detail_videoView);
     }
 
@@ -119,6 +119,13 @@ public class NewDetail extends BaseActivity {
                 Intent newCommentIntent = new Intent(NewDetail.this, NewComment.class);
                 newCommentIntent.putExtra("post", postId);
                 startActivity(newCommentIntent);
+            }
+        });
+
+        videoShareImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(NewDetail.this, "点击分享", Toast.LENGTH_SHORT).show();
             }
         });
 
