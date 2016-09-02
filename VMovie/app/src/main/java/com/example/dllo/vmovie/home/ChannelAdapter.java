@@ -89,5 +89,5 @@ public class ChannelAdapter extends RecyclerView.Adapter {
     public interface OnRecyclerItemClickListener {
         void onItemClick(View view, ChannelHolder newHolder, int position);
     }
-
 }
+

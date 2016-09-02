@@ -1,6 +1,8 @@
 package com.example.dllo.vmovie.home;
 
+
 import android.content.Intent;
+
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -76,3 +78,4 @@ public class ChannelFragment extends BaseFragment {
         });
     }
 }
+

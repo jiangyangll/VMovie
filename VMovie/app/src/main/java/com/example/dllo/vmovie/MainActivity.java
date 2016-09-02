@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import android.widget.RelativeLayout;
+
 import android.widget.Toast;
 
 import com.example.dllo.vmovie.base.BaseActivity;
@@ -47,6 +48,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         relativeDrawerHome.setOnClickListener(this);
         relativeDrawerSeries.setOnClickListener(this);
         relativeDrawerBehind.setOnClickListener(this);
+
+        replaceFragment(R.id.fragment_replace,new HomePagerFragment());
     }
 
     @Override
@@ -132,6 +135,4 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             System.exit(0);
         }
     }
-
 }
-

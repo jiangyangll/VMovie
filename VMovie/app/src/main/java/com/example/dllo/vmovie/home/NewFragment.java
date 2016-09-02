@@ -22,6 +22,7 @@ import java.util.List;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
 
+
 /**
  * Created by dllo on 16/8/30.
  */
@@ -50,7 +51,6 @@ public class NewFragment extends BaseFragment {
         manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         adapter = new NewAdapter(getContext());
-
 
         //轮播图头布局
         final View headView = LayoutInflater.from(getContext()).inflate(R.layout.wraprecycler_headview, null);

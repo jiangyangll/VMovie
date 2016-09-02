@@ -7,7 +7,6 @@ import java.util.List;
  */
 public class NewBean {
 
-
     /**
      * status : 0
      * msg : OK
