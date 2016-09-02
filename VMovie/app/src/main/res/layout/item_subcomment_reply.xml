@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/image_subcomment_avatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/tv_subcomment_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/image_subcomment_avatar"
+        android:text="白雪"
+        android:textSize="10sp"/>
+
+    <TextView
+        android:id="@+id/tv_subcomment_addtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_subcomment_username"
+        android:layout_margin="10dp"
+        android:layout_toRightOf="@+id/image_subcomment_avatar"
+        android:text="2014年8月31日"
+        android:textSize="10sp"/>
+
+    <TextView
+        android:id="@+id/tv_reply_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:textColor="@android:color/black"
+        android:layout_marginRight="10dp"
+        android:layout_alignLeft="@+id/tv_subcomment_username"
+        android:layout_below="@+id/tv_subcomment_addtime"
+        android:text="番哒君"/>
+
+    <ImageView
+        android:id="@+id/image_subcomment_handle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/selector_comment_handle"/>
+
+    <TextView
+        android:id="@+id/tv_subcomment_count_approve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/image_subcomment_handle"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/image_subcomment_handle"
+        android:text="2"
+        android:textSize="10sp"/>
+
+</RelativeLayout>

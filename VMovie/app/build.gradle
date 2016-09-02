@@ -33,5 +33,7 @@ dependencies {
     compile 'org.apache.httpcomponents:httpcore:4.4.2'
     compile 'com.facebook.fresco:fresco:0.12.0'
     compile 'org.greenrobot:eventbus:3.0.0'
+
     compile project(':vitamio')
+
 }

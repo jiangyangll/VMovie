@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.dllo.vmovie.R;
 import com.example.dllo.vmovie.backstage.bean.AllDetailBean;
+import com.example.dllo.vmovie.backstage.bean.CommentDetailBean;
 import com.example.dllo.vmovie.base.BaseActivity;
 import com.example.dllo.vmovie.netutil.NetUtil;
 import com.example.dllo.vmovie.okhttptool.NetTool;
@@ -23,6 +24,8 @@ public class AllDetailActivity extends BaseActivity implements OnClickListener {
     private ImageView image_back, image_share, image_side_likes,
             image_bottom_share, image_comment;
     private WebView mWebView;
+    private int id;
+    private String newId;
 
     @Override
     public int setLayout() {
@@ -51,8 +54,8 @@ public class AllDetailActivity extends BaseActivity implements OnClickListener {
     @Override
     protected void initData() {
         Intent intent = getIntent();
-        String newId = intent.getStringExtra("id");
-        int id = Integer.parseInt(newId);
+        newId = intent.getStringExtra("id");
+        id = Integer.parseInt(newId);
         NetTool.getInstance().startRequest(NetUtil.BACKSTAGE_DETAIL + id, AllDetailBean.class, new OnHttpCallBack<AllDetailBean>() {
             @Override
             public void onSuccess(AllDetailBean response) {
@@ -83,6 +86,10 @@ public class AllDetailActivity extends BaseActivity implements OnClickListener {
             case R.id.image_bottom_share:
                 break;
             case R.id.image_comment:
+                Intent intent = new Intent(AllDetailActivity.this, CommentDetailActivity.class);
+                intent.putExtra("id",newId);
+                overridePendingTransition(R.anim.enter_anim,R.anim.exit_anim);
+                startActivity(intent);
                 break;
         }
 

@@ -10,4 +10,6 @@
     <color name="white">#ffffff</color>
     <color name="red">#FFFF1826</color>
     <color name="gray_dSix">#d6d6d6</color>
+
+    <color name="light_gray">#E7E7E7</color>
 </resources>
