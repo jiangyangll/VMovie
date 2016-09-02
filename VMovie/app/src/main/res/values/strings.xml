@@ -15,5 +15,6 @@
     <string name="say_something">我来说两句...</string>
 
     <string name="check_al">查看全部</string>
+    <string name="video_is_playing">正在播放</string>
 
 </resources>

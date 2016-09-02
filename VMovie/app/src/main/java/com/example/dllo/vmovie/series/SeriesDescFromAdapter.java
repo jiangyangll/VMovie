@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ public class SeriesDescFromAdapter extends Adapter<FromHolder>{
 
     private SeriesDescBean seriesDescBean;
     private Context context;
+    private OnFromChangeListener listener;
 
     public SeriesDescFromAdapter(Context context) {
         this.context = context;
@@ -28,14 +30,27 @@ public class SeriesDescFromAdapter extends Adapter<FromHolder>{
         notifyDataSetChanged();
     }
 
+    public void setOnFromChangeListener(OnFromChangeListener onFromChangeListener){
+        this.listener = onFromChangeListener;
+    }
+
     @Override
     public FromHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new FromHolder(LayoutInflater.from(context).inflate(R.layout.item_series_description_from,parent,false));
     }
 
     @Override
-    public void onBindViewHolder(FromHolder holder, int position) {
+    public void onBindViewHolder(final FromHolder holder, int position) {
         holder.tvFrom.setText(seriesDescBean.getData().getPosts().get(position).getFrom_to());
+        if (listener != null) {
+            holder.itemView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = holder.getAdapterPosition();
+                    listener.onFromChanged(position);
+                }
+            });
+        }
     }
 
     @Override
@@ -49,5 +64,9 @@ public class SeriesDescFromAdapter extends Adapter<FromHolder>{
             super(itemView);
             tvFrom = (TextView) itemView.findViewById(R.id.tv_series_description_from_item);
         }
+    }
+
+    public interface OnFromChangeListener{
+        void onFromChanged(int fromPosition);
     }
 }

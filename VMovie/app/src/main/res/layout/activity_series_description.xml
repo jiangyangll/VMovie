@@ -50,7 +50,6 @@
                     android:id="@+id/tv_series_description_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="第85集"
                     android:textSize="@dimen/twenty_sp"
                     android:textColor="@android:color/black"
                     android:layout_marginTop="@dimen/fifteen_dp"
@@ -80,7 +79,6 @@
                         android:id="@+id/tv_series_description_count_follow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="88940人订阅"
                         android:textColor="@android:color/darker_gray"
                         android:layout_below="@+id/iv_series_description_attention"
                         android:layout_alignParentRight="true"
@@ -91,7 +89,6 @@
                     android:id="@+id/tv_series_description_small_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="电影自习室"
                     android:textColor="@android:color/darker_gray"
                     android:layout_below="@+id/tv_series_description_title"
                     android:layout_alignLeft="@+id/tv_series_description_title"
@@ -103,7 +100,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/darker_gray"
-                    android:text="每周四更新"
                     android:layout_below="@+id/tv_series_description_small_title"
                     android:layout_alignLeft="@+id/tv_series_description_small_title"
                     android:layout_marginTop="@dimen/ten_dp"
@@ -113,7 +109,6 @@
                     android:id="@+id/tv_series_description_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="更新至85集"
                     android:textSize="@dimen/twelve_sp"
                     android:textColor="@android:color/darker_gray"
                     android:layout_below="@+id/tv_series_description_weekly"
@@ -124,7 +119,6 @@
                     android:id="@+id/tv_series_description_tag_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="涨姿势"
                     android:layout_marginTop="@dimen/five_dp"
                     android:textColor="@android:color/darker_gray"
                     android:layout_below="@+id/tv_series_description_update"
@@ -136,7 +130,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="2"
-                    android:text="[电影自习室] 是V电影网出品的一档影视教学视频栏目,主要面向初级影视爱好者,为大家分享影视方面的技巧,心得,每周更新两期"
                     android:textColor="@android:color/black"
                     android:layout_below="@+id/tv_series_description_tag_name"
                     android:layout_alignLeft="@+id/tv_series_description_tag_name"
@@ -190,6 +183,10 @@
                     android:layout_height="match_parent"
                     />
             </LinearLayout>
+            <com.example.dllo.vmovie.customview.GrapListView
+                android:id="@+id/list_series_description_video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
     </ScrollView>
