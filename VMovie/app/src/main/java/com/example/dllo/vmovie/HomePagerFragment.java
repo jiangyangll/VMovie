@@ -203,8 +203,6 @@ public class HomePagerFragment extends BaseFragment {
         }
     }
 
-    ;
-
     /**
      * 设置动画图片宽度
      *
