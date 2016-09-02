@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.RelativeLayout;
@@ -14,9 +16,12 @@ import android.widget.VideoView;
 
 import com.example.dllo.vmovie.R;
 import com.example.dllo.vmovie.base.BaseActivity;
+import com.example.dllo.vmovie.customview.GrapListView;
 import com.example.dllo.vmovie.netutil.NetUtil;
 import com.example.dllo.vmovie.okhttptool.NetTool;
 import com.example.dllo.vmovie.okhttptool.OnHttpCallBack;
+import com.example.dllo.vmovie.series.SeriesDescFromAdapter.OnFromChangeListener;
+
 
 /**
  * Created by dllo on 16/9/1.
@@ -34,6 +39,9 @@ public class SeriesDesActivity extends BaseActivity implements OnClickListener {
     private String videoUrl;
     private RecyclerView recyclerSeriesDescFrom;
     private SeriesDescFromAdapter fromAdapter;
+    private GrapListView listVideo;
+    private SeriesDescVideoListAdapter videoListAdapter;
+    private SeriesDescBean seriesDescBean;
 
     @Override
     public int setLayout() {
@@ -56,6 +64,7 @@ public class SeriesDesActivity extends BaseActivity implements OnClickListener {
         ivBack = (ImageView) findViewById(R.id.iv_series_description_back);
         videoView = (VideoView) findViewById(R.id.video_series_description);
         recyclerSeriesDescFrom = (RecyclerView) findViewById(R.id.recycler_series_description_from);
+        listVideo = (GrapListView) findViewById(R.id.list_series_description_video);
         ivBack.setOnClickListener(this);
         relativeSeriesDescContent.setOnClickListener(this);
     }
@@ -67,9 +76,11 @@ public class SeriesDesActivity extends BaseActivity implements OnClickListener {
         String url = NetUtil.SERIES_DETAIL_LEFT + seriesId + NetUtil.SERIES_DETAIL_RIGHT;
         final MediaController mediaController = new MediaController(this);
         fromAdapter = new SeriesDescFromAdapter(this);
+        videoListAdapter = new SeriesDescVideoListAdapter(this);
         NetTool.getInstance().startRequest(url, SeriesDescBean.class, new OnHttpCallBack<SeriesDescBean>() {
             @Override
             public void onSuccess(SeriesDescBean response) {
+                seriesDescBean = response;
                 tvSeriesDescTitle.setText("第" + response.getData().getPosts().get(0).getList().get(0).getNumber() + "集  "
                         + response.getData().getPosts().get(0).getList().get(0).getTitle());
                 tvSeriesDescSmallTitle.setText(response.getData().getTitle());
@@ -79,6 +90,9 @@ public class SeriesDesActivity extends BaseActivity implements OnClickListener {
                 tvSeriesDescTagName.setText("类型: " + response.getData().getTag_name());
                 tvSeriesDescContent.setText(response.getData().getContent());
                 videoUrl = NetUtil.VIDEO_LEFT + response.getData().getPosts().get(0).getList().get(0).getSeries_postid() + NetUtil.VIDEO_RIGHT;
+                videoListAdapter.setSeriesDescBean(response);
+                videoListAdapter.setFromPosition(0);
+                listVideo.setAdapter(videoListAdapter);
 
                 NetTool.getInstance().startRequest(videoUrl, SeriesVideoDescBean.class, new OnHttpCallBack<SeriesVideoDescBean>() {
                     @Override
@@ -107,6 +121,31 @@ public class SeriesDesActivity extends BaseActivity implements OnClickListener {
             }
         });
 
+        fromAdapter.setOnFromChangeListener(new OnFromChangeListener() {
+            @Override
+            public void onFromChanged(int fromPosition) {
+                videoListAdapter.setFromPosition(fromPosition);
+                listVideo.setAdapter(videoListAdapter);
+            }
+        });
+
+//        listVideo.setOnItemClickListener(new OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                tvSeriesDescTitle.setText("第" + seriesDescBean.getData().getPosts().get(0).getList().get(0).getNumber() + "集  "
+//                        + response.getData().getPosts().get(0).getList().get(0).getTitle());
+//                tvSeriesDescSmallTitle.setText(response.getData().getTitle());
+//                tvSeriesDescFollowCount.setText(response.getData().getCount_follow() + "人订阅");
+//                tvSeriesDescUpdate.setText("集数: 更新至" + response.getData().getUpdate_to() + "集");
+//                tvSeriesDescWeekly.setText("更新: " + response.getData().getWeekly());
+//                tvSeriesDescTagName.setText("类型: " + response.getData().getTag_name());
+//                tvSeriesDescContent.setText(response.getData().getContent());
+//                videoUrl = NetUtil.VIDEO_LEFT + response.getData().getPosts().get(0).getList().get(0).getSeries_postid() + NetUtil.VIDEO_RIGHT;
+//                videoListAdapter.setSeriesDescBean(response);
+//                videoListAdapter.setFromPosition(0);
+//                listVideo.setAdapter(videoListAdapter);
+//            }
+//        });
 
     }
 
