@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:vswitch="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
@@ -12,16 +13,21 @@
         android:layout_marginRight="@dimen/fifty_dp"
         android:background="@android:color/black">
 
-        <TextView
+        <com.example.dllo.vmovie.customview.VerticalSwitchTextView
             android:id="@+id/new_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/last_new"
+            android:layout_marginTop="20dp"
             android:textColor="@color/white"
-            android:textSize="@dimen/fourteen_size"
-            android:textStyle="bold" />
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:ellipsize="middle"
+            vswitch:alignment="left"
+            vswitch:switchDuaration = "1000"
+            vswitch:idleDuaration = "1500"
+            vswitch:switchOrientation="up"/>
 
         <TextView
             android:id="@+id/channel_text"
@@ -51,6 +57,19 @@
             android:src="@color/white" />
     </LinearLayout>
 
+    <!--<com.example.dllo.vmovie.customview.VerticalSwitchTextView-->
+    <!--android:id="@+id/vertical_switch_textview"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textColor="@android:color/holo_blue_light"-->
+    <!--android:textSize="30sp"-->
+    <!--android:padding="8dp"-->
+    <!--android:background="@android:color/white"-->
+    <!--android:ellipsize="end"-->
+    <!--vswitch:alignment="left"-->
+    <!--vswitch:switchDuaration = "1000"-->
+    <!--vswitch:idleDuaration = "1500"-->
+    <!--vswitch:switchOrientation="up" />-->
 
     <android.support.v4.view.ViewPager
         android:id="@+id/home_view_pager"
