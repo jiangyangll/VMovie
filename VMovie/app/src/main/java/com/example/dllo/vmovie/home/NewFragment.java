@@ -2,12 +2,11 @@ package com.example.dllo.vmovie.home;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.VideoView;
 
 import com.example.dllo.vmovie.R;
 import com.example.dllo.vmovie.base.BaseFragment;
@@ -51,7 +50,6 @@ public class NewFragment extends BaseFragment {
         recyclerView.setLayoutManager(manager);
         adapter = new NewAdapter(getContext());
 
-
         //轮播图头布局
         final View headView = LayoutInflater.from(getContext()).inflate(R.layout.wraprecycler_headview, null);
         customBanner = (BGABanner) headView.findViewById(R.id.banner_main_cube);
@@ -62,11 +60,28 @@ public class NewFragment extends BaseFragment {
 
         NetTool.getInstance().startRequest(NetUtil.NEWEST_RECYCLER, CarouselBean.class, new OnHttpCallBack<CarouselBean>() {
             @Override
-            public void onSuccess(CarouselBean response) {
+            public void onSuccess(final CarouselBean response) {
                 for (int i = 0; i < response.getData().size(); i++) {
                     SimpleDraweeView simpleDraweeView;
                     simpleDraweeView = (SimpleDraweeView) customViews.get(i);
                     simpleDraweeView.setImageURI(Uri.parse(response.getData().get(i).getImage()));
+
+                    String type = response.getData().get(i).getExtra_data().getApp_banner_type();
+                    String params = response.getData().get(i).getExtra_data().getApp_banner_param();
+                    final CarouselData data = new CarouselData();
+                    data.setType(type);
+                    data.setParams(params);
+
+                    simpleDraweeView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getContext(), CarouselActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putParcelable("params",data);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+                    });
                 }
             }
 
@@ -84,8 +99,8 @@ public class NewFragment extends BaseFragment {
                 adapter.setListener(new NewAdapter.OnRecyclerItemClickListener() {
                     @Override
                     public void onItemClick(View view, NewAdapter.NewHolder newHolder, int position) {
-                        Intent intent = new Intent(getContext(),NewDetail.class);
-                        intent.putExtra("postId",response.getData().get(position - 1).getPostid());
+                        Intent intent = new Intent(getContext(), NewDetail.class);
+                        intent.putExtra("postId", response.getData().get(position - 1).getPostid());
                         startActivity(intent);
                     }
                 });
@@ -95,7 +110,6 @@ public class NewFragment extends BaseFragment {
             public void onError(Throwable e) {
             }
         });
-
         recyclerView.addHeaderView(headView);
     }
 

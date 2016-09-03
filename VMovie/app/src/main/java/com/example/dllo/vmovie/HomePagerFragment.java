@@ -203,8 +203,6 @@ public class HomePagerFragment extends BaseFragment {
         }
     }
 
-    ;
-
     /**
      * 设置动画图片宽度
      *
@@ -225,3 +223,4 @@ public class HomePagerFragment extends BaseFragment {
         channelTv.setTextColor(getResources().getColor(R.color.white));
     }
 }
+

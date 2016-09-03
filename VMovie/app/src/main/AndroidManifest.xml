@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".VMovieApplication"
         android:allowBackup="true"
@@ -36,7 +38,7 @@
         <activity android:name=".home.ChannelComment" />
         <activity android:name=".home.NewComment" />
         <activity android:name=".home.NewDetail" />
-
+        <activity android:name=".home.CarouselActivity"/>
         <activity android:name=".backstage.activity.CommentDetailActivity"/>
 
         <activity android:name=".series.SeriesDesActivity"/>

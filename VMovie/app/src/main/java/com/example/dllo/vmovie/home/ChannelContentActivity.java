@@ -27,7 +27,7 @@ public class ChannelContentActivity extends BaseActivity {
     //频道-点击后进入各个子频道-详情信息
     private WebView webView;
     private TextView like, share, comment;
-    private ImageView likeImage, shareImage, commentImage, cacheImage, videoBackImg, videoCacheImg;
+    private ImageView likeImage, shareImage, commentImage, cacheImage, videoBackImg, videoShareImg;
     private VideoView videoView;
 
     @Override
@@ -50,7 +50,7 @@ public class ChannelContentActivity extends BaseActivity {
         cacheImage = (ImageView) findViewById(R.id.channel_content_img_cache);
 
         videoBackImg = (ImageView) findViewById(R.id.channel_content_video_img_back);
-        videoCacheImg = (ImageView) findViewById(R.id.channel_content_video_img_cache);
+        videoShareImg = (ImageView) findViewById(R.id.channel_content_video_img_share);
 
         videoView = (VideoView) findViewById(R.id.channel_content_videoView);
     }
@@ -98,10 +98,10 @@ public class ChannelContentActivity extends BaseActivity {
             }
         });
 
-        videoCacheImg.setOnClickListener(new View.OnClickListener() {
+        videoShareImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ChannelContentActivity.this, "点击缓存", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChannelContentActivity.this, "点击分享", Toast.LENGTH_SHORT).show();
             }
         });
 

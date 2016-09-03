@@ -9,7 +9,9 @@
     <color name="main_top_tab_color_2">#fdee79</color>
     <color name="white">#ffffff</color>
     <color name="red">#FFFF1826</color>
+
     <color name="gray_dSix">#d6d6d6</color>
     <color name="trans_black">#7f000000</color>
     <color name="light_gray">#E7E7E7</color>
+
 </resources>

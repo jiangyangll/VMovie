@@ -19,7 +19,8 @@
             <FrameLayout
                 android:id="@+id/fragment_replace"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent">
+
                 <include layout="@layout/click_drawerable_search" />
             </FrameLayout>
         </LinearLayout>
@@ -28,15 +29,13 @@
             android:id="@+id/relative_drawer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
-            >
+            android:layout_gravity="start">
 
-            <include layout="@layout/drawer_layout"/>
+            <include layout="@layout/drawer_layout" />
 
         </RelativeLayout>
 
     </android.support.v4.widget.DrawerLayout>
-
 
 
 </LinearLayout>
