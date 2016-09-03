@@ -1,5 +1,6 @@
 package com.example.dllo.vmovie.series;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,6 +18,7 @@ public class SeriesFragment extends BaseFragment {
 
     private RecyclerView recyclerSeries;
     private SeriesAdapter seriesAdapter;
+    private SwipeRefreshLayout refreshLayout;
 
     ///系列
 
@@ -28,6 +30,7 @@ public class SeriesFragment extends BaseFragment {
     @Override
     protected void initView(View view) {
         recyclerSeries = (RecyclerView) view.findViewById(R.id.recycler_series);
+        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_series);
     }
 
     @Override
