@@ -30,11 +30,8 @@ import java.util.ArrayList;
 public class HomePagerFragment extends BaseFragment {
 
     //首页
-
     //最新
-    private VerticalSwitchTextView newTv;
-    private ArrayList<String> list;
-
+    private TextView newTv;
     //频道
     private TextView channelTv;
     //实现Tab滑动效果
@@ -58,7 +55,6 @@ public class HomePagerFragment extends BaseFragment {
 
     @Override
     protected int setLayout() {
-        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         return R.layout.fragment_homepager;
     }
 
@@ -83,37 +79,10 @@ public class HomePagerFragment extends BaseFragment {
     private void initTextView(View view) {
 
         //最新头标
-        newTv = (VerticalSwitchTextView) view.findViewById(R.id.new_text);
+        newTv = (TextView) view.findViewById(R.id.new_text);
         //频道头标
         channelTv = (TextView) view.findViewById(R.id.channel_text);
 
-        list = new ArrayList<>();
-
-        NetTool.getInstance().startRequest(NetUtil.NEWEST, NewBean.class, new OnHttpCallBack<NewBean>() {
-            @Override
-            public void onSuccess(NewBean response) {
-                for (int i = 0; i < 10; i++) {
-                    String data = response.getData().get(i).getTitle();
-                    Log.d("HomePagerFragment", data);
-                    list.add(data);
-                }
-                newTv.setTextContent(list);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-            }
-        });
-
-        newTv.setCbInterface(new VerticalSwitchTextView.VerticalSwitchTextViewCbInterface() {
-            @Override
-            public void showNext(int index) {
-            }
-
-            @Override
-            public void onItemClick(int index) {
-            }
-        });
         //添加点击事件
         newTv.setOnClickListener(new MyOnClickListener(0));
         channelTv.setOnClickListener(new MyOnClickListener(1));

@@ -10,9 +10,13 @@ import android.widget.Toast;
 
 import com.example.dllo.vmovie.R;
 import com.example.dllo.vmovie.base.BaseActivity;
+import com.example.dllo.vmovie.customview.VerticalSwitchTextView;
 import com.example.dllo.vmovie.netutil.NetUtil;
 import com.example.dllo.vmovie.okhttptool.NetTool;
 import com.example.dllo.vmovie.okhttptool.OnHttpCallBack;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.Vitamio;
@@ -29,6 +33,9 @@ public class ChannelContentActivity extends BaseActivity {
     private TextView like, share, comment;
     private ImageView likeImage, shareImage, commentImage, cacheImage, videoBackImg, videoShareImg;
     private VideoView videoView;
+
+    private VerticalSwitchTextView vsTv;
+    private ArrayList<String> list;
 
     @Override
     public int setLayout() {
@@ -53,6 +60,8 @@ public class ChannelContentActivity extends BaseActivity {
         videoShareImg = (ImageView) findViewById(R.id.channel_content_video_img_share);
 
         videoView = (VideoView) findViewById(R.id.channel_content_videoView);
+
+        vsTv = (VerticalSwitchTextView) findViewById(R.id.channel_content_VSTV);
     }
 
     @Override
@@ -121,7 +130,6 @@ public class ChannelContentActivity extends BaseActivity {
                         mediaPlayer.setPlaybackSpeed(1.0f);
                     }
                 });
-//                videoView.start();
             }
 
             @Override
@@ -130,7 +138,7 @@ public class ChannelContentActivity extends BaseActivity {
             }
         });
 
-
-
+        list = new ArrayList<>(Arrays.asList("无线你的无限  英特尔","世界因为不同","只要有梦想  凡事可成真","世界因你而广阔","极速炫彩  掌控天下  霸气十足","天下有双  驰骋世界","人生本有无数可能 让可能变成现实","俯视天下  智握巅峰","奇迹世界  由你掌控"));
+        vsTv.setTextContent(list);
     }
 }
