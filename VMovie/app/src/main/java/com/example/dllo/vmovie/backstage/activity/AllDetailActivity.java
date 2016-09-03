@@ -48,6 +48,13 @@ public class AllDetailActivity extends BaseActivity implements OnClickListener {
         image_bottom_share.setOnClickListener(this);
         image_comment.setOnClickListener(this);
         mWebView = (WebView) findViewById(R.id.webView);
+        mWebView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AllDetailActivity.this,AllDetailActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
