@@ -1,6 +1,7 @@
 package com.example.dllo.vmovie.series;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ public class SeriesDescFromAdapter extends Adapter<FromHolder>{
     private SeriesDescBean seriesDescBean;
     private Context context;
     private OnFromChangeListener listener;
+    private int clickPosition;
 
     public SeriesDescFromAdapter(Context context) {
         this.context = context;
@@ -27,6 +29,11 @@ public class SeriesDescFromAdapter extends Adapter<FromHolder>{
 
     public void setSeriesDescBean(SeriesDescBean seriesDescBean) {
         this.seriesDescBean = seriesDescBean;
+        notifyDataSetChanged();
+    }
+
+    public void setClickPosition(int clickPosition) {
+        this.clickPosition = clickPosition;
         notifyDataSetChanged();
     }
 
@@ -51,6 +58,12 @@ public class SeriesDescFromAdapter extends Adapter<FromHolder>{
                 }
             });
         }
+        if (clickPosition == position) {
+            holder.tvFrom.setTextColor(Color.BLACK);
+        }else {
+            holder.tvFrom.setTextColor(Color.LTGRAY);
+        }
+
     }
 
     @Override

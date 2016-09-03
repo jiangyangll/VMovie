@@ -22,6 +22,8 @@ public class SeriesDescVideoListAdapter extends BaseAdapter {
     private Context context;
     private SeriesDescBean seriesDescBean;
     private int fromPosition;
+    private int clickFromPosition;
+    private int clickPosition;
 
     public SeriesDescVideoListAdapter(Context context) {
         this.context = context;
@@ -34,6 +36,16 @@ public class SeriesDescVideoListAdapter extends BaseAdapter {
 
     public void setFromPosition(int fromPosition) {
         this.fromPosition = fromPosition;
+        notifyDataSetChanged();
+    }
+
+    public void setClickPosition(int clickPosition) {
+        this.clickPosition = clickPosition;
+        notifyDataSetChanged();
+    }
+
+    public void setClickFromPosition(int clickFromPosition) {
+        this.clickFromPosition = clickFromPosition;
         notifyDataSetChanged();
     }
 
@@ -72,6 +84,13 @@ public class SeriesDescVideoListAdapter extends BaseAdapter {
         String durtion = format.format(date);
         holder.tvDuration.setText(durtion);
         Glide.with(context).load(seriesDescBean.getData().getPosts().get(fromPosition).getList().get(position).getThumbnail()).into(holder.ivVideoImage);
+        if (clickFromPosition == fromPosition) {
+            if (clickPosition == position) {
+                holder.tvPlayState.setVisibility(View.VISIBLE);
+            }else {
+                holder.tvPlayState.setVisibility(View.GONE);
+            }
+        }
         return convertView;
     }
 

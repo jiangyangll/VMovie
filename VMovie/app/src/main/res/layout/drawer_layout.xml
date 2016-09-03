@@ -149,9 +149,12 @@
         android:clickable="true"
         >
         <ImageView
+            android:id="@+id/iv_drawer_homepage_blank"
             android:layout_width="@dimen/ten_dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/fifty_dp"
             android:background="@android:color/white"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
             />
         <ImageView
             android:id="@+id/iv_drawer_homepage"
@@ -163,6 +166,7 @@
             android:layout_marginLeft="@dimen/forty_dp"
             />
         <TextView
+            android:id="@+id/tv_drawer_homepage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_drawer_homepage"
@@ -182,9 +186,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:id="@+id/iv_drawer_series_blank"
             android:layout_width="@dimen/ten_dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/fifty_dp"
             android:background="@android:color/white"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
             />
         <ImageView
             android:id="@+id/iv_drawer_series"
@@ -196,6 +203,7 @@
             android:layout_marginLeft="@dimen/forty_dp"
             />
         <TextView
+            android:id="@+id/tv_drawer_series"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_drawer_series"
@@ -215,9 +223,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:id="@+id/iv_drawer_behind_blank"
             android:layout_width="@dimen/ten_dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/fifty_dp"
+            android:layout_centerVertical="true"
             android:background="@android:color/white"
+            android:visibility="gone"
             />
         <ImageView
             android:id="@+id/iv_drawer_behind"
@@ -229,6 +240,7 @@
             android:layout_marginLeft="@dimen/forty_dp"
             />
         <TextView
+            android:id="@+id/tv_drawer_behind"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_drawer_behind"
