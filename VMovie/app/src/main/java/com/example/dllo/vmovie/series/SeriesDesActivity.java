@@ -29,7 +29,7 @@ import com.example.dllo.vmovie.series.SeriesDescFromAdapter.OnFromChangeListener
 public class SeriesDesActivity extends BaseActivity implements OnClickListener {
 
     private TextView tvSeriesDescTitle, tvSeriesDescSmallTitle, tvSeriesDescWeekly, tvSeriesDescUpdate,
-         tvSeriesDescTagName, tvSeriesDescContent, tvSeriesDescFollowCount, tvSeriesDescCheckContent;
+         tvSeriesDescTagName, tvSeriesDescContent, tvSeriesDescFollowCount, tvSeriesDescCheckContent, tvShareCount, tvCommentCount;
     private ImageView ivSeriesDescCheckUp, ivSeriesDescCheckDown, ivBack;
     private static final int UP_STATE = 0;
     private static final int DOWN_STATE = 1;
@@ -42,6 +42,8 @@ public class SeriesDesActivity extends BaseActivity implements OnClickListener {
     private GrapListView listVideo;
     private SeriesDescVideoListAdapter videoListAdapter;
     private SeriesDescBean seriesDescBean;
+    private int fromPositon;
+    private int clickFromPosition;
 
     @Override
     public int setLayout() {
@@ -65,6 +67,8 @@ public class SeriesDesActivity extends BaseActivity implements OnClickListener {
         videoView = (VideoView) findViewById(R.id.video_series_description);
         recyclerSeriesDescFrom = (RecyclerView) findViewById(R.id.recycler_series_description_from);
         listVideo = (GrapListView) findViewById(R.id.list_series_description_video);
+        tvShareCount = (TextView) findViewById(R.id.tv_series_description_share_num);
+        tvCommentCount = (TextView) findViewById(R.id.tv_series_description_count_comment);
         ivBack.setOnClickListener(this);
         relativeSeriesDescContent.setOnClickListener(this);
     }
@@ -101,6 +105,8 @@ public class SeriesDesActivity extends BaseActivity implements OnClickListener {
                         videoView.setMediaController(mediaController);
                         videoView.requestFocus();
                         videoView.start();
+                        tvShareCount.setText(response.getData().getCount_share());
+                        tvCommentCount.setText(response.getData().getCount_comment());
                     }
 
                     @Override
@@ -124,28 +130,49 @@ public class SeriesDesActivity extends BaseActivity implements OnClickListener {
         fromAdapter.setOnFromChangeListener(new OnFromChangeListener() {
             @Override
             public void onFromChanged(int fromPosition) {
+                SeriesDesActivity.this.fromPositon = fromPosition;
+                SeriesDesActivity.this.clickFromPosition = fromPosition;
+                fromAdapter.setClickPosition(fromPosition);
                 videoListAdapter.setFromPosition(fromPosition);
                 listVideo.setAdapter(videoListAdapter);
             }
         });
 
-//        listVideo.setOnItemClickListener(new OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                tvSeriesDescTitle.setText("第" + seriesDescBean.getData().getPosts().get(0).getList().get(0).getNumber() + "集  "
-//                        + response.getData().getPosts().get(0).getList().get(0).getTitle());
-//                tvSeriesDescSmallTitle.setText(response.getData().getTitle());
-//                tvSeriesDescFollowCount.setText(response.getData().getCount_follow() + "人订阅");
-//                tvSeriesDescUpdate.setText("集数: 更新至" + response.getData().getUpdate_to() + "集");
-//                tvSeriesDescWeekly.setText("更新: " + response.getData().getWeekly());
-//                tvSeriesDescTagName.setText("类型: " + response.getData().getTag_name());
-//                tvSeriesDescContent.setText(response.getData().getContent());
-//                videoUrl = NetUtil.VIDEO_LEFT + response.getData().getPosts().get(0).getList().get(0).getSeries_postid() + NetUtil.VIDEO_RIGHT;
-//                videoListAdapter.setSeriesDescBean(response);
-//                videoListAdapter.setFromPosition(0);
-//                listVideo.setAdapter(videoListAdapter);
-//            }
-//        });
+        listVideo.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                tvSeriesDescTitle.setText("第" + seriesDescBean.getData().getPosts().get(fromPositon).getList().get(position).getNumber() + "集  "
+                        + seriesDescBean.getData().getPosts().get(fromPositon).getList().get(position).getTitle());
+                tvSeriesDescSmallTitle.setText(seriesDescBean.getData().getTitle());
+                tvSeriesDescFollowCount.setText(seriesDescBean.getData().getCount_follow() + "人订阅");
+                tvSeriesDescUpdate.setText("集数: 更新至" + seriesDescBean.getData().getUpdate_to() + "集");
+                tvSeriesDescWeekly.setText("更新: " + seriesDescBean.getData().getWeekly());
+                tvSeriesDescTagName.setText("类型: " + seriesDescBean.getData().getTag_name());
+                tvSeriesDescContent.setText(seriesDescBean.getData().getContent());
+                videoUrl = NetUtil.VIDEO_LEFT + seriesDescBean.getData().getPosts().get(fromPositon).getList().get(position).getSeries_postid() + NetUtil.VIDEO_RIGHT;
+                NetTool.getInstance().startRequest(videoUrl, SeriesVideoDescBean.class, new OnHttpCallBack<SeriesVideoDescBean>() {
+                    @Override
+                    public void onSuccess(SeriesVideoDescBean response) {
+                        videoView.setVideoURI(Uri.parse(response.getData().getQiniu_url()));
+                        videoView.setMediaController(mediaController);
+                        videoView.requestFocus();
+                        videoView.start();
+                        tvShareCount.setText(response.getData().getCount_share());
+                        tvCommentCount.setText(response.getData().getCount_comment());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+                videoListAdapter.setSeriesDescBean(seriesDescBean);
+                videoListAdapter.setFromPosition(fromPositon);
+                videoListAdapter.setClickFromPosition(clickFromPosition);
+                videoListAdapter.setClickPosition(position);
+                listVideo.setAdapter(videoListAdapter);
+            }
+        });
 
     }
 
@@ -174,4 +201,6 @@ public class SeriesDesActivity extends BaseActivity implements OnClickListener {
                 break;
         }
     }
+
+
 }
