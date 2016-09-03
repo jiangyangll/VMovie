@@ -23,7 +23,7 @@
         android:textColor="@android:color/white"
         android:layout_marginTop="@dimen/ten_dp"
         android:layout_marginBottom="@dimen/ten_dp"
-        android:background="#7f000000"
+        android:background="@color/trans_black"
         android:visibility="invisible"
         />
     <TextView
