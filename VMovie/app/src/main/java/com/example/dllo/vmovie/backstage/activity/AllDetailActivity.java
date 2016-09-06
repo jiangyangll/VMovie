@@ -4,12 +4,11 @@ import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.dllo.vmovie.R;
 import com.example.dllo.vmovie.backstage.bean.AllDetailBean;
-import com.example.dllo.vmovie.backstage.bean.CommentDetailBean;
 import com.example.dllo.vmovie.base.BaseActivity;
 import com.example.dllo.vmovie.netutil.NetUtil;
 import com.example.dllo.vmovie.okhttptool.NetTool;
@@ -24,8 +23,7 @@ public class AllDetailActivity extends BaseActivity implements OnClickListener {
     private ImageView image_back, image_share, image_side_likes,
             image_bottom_share, image_comment;
     private WebView mWebView;
-    private int id;
-    private String newId;
+    private String postId;
 
     @Override
     public int setLayout() {
@@ -55,15 +53,13 @@ public class AllDetailActivity extends BaseActivity implements OnClickListener {
                 startActivity(intent);
             }
         });
-
     }
 
     @Override
     protected void initData() {
         Intent intent = getIntent();
-        newId = intent.getStringExtra("id");
-        id = Integer.parseInt(newId);
-        NetTool.getInstance().startRequest(NetUtil.BACKSTAGE_DETAIL + id, AllDetailBean.class, new OnHttpCallBack<AllDetailBean>() {
+        postId = intent.getStringExtra("id");
+        NetTool.getInstance().startRequest(NetUtil.BACKSTAGE_DETAIL + postId, AllDetailBean.class, new OnHttpCallBack<AllDetailBean>() {
             @Override
             public void onSuccess(AllDetailBean response) {
                 tv_count_comment.setText(response.getData().getCount_comment());
@@ -77,7 +73,9 @@ public class AllDetailActivity extends BaseActivity implements OnClickListener {
             }
         });
 
-        mWebView.loadUrl(NetUtil.WEB_LEFT + id + NetUtil.WEB_RIGHT);
+        WebViewClient webViewClient = new WebViewClient();
+        mWebView.setWebViewClient(webViewClient);
+        mWebView.loadUrl(NetUtil.WEB_LEFT + postId + NetUtil.WEB_RIGHT);
     }
 
     @Override
@@ -94,11 +92,10 @@ public class AllDetailActivity extends BaseActivity implements OnClickListener {
                 break;
             case R.id.image_comment:
                 Intent intent = new Intent(AllDetailActivity.this, CommentDetailActivity.class);
-                intent.putExtra("id",newId);
+                intent.putExtra("id",postId);
                 overridePendingTransition(R.anim.enter_anim,R.anim.exit_anim);
                 startActivity(intent);
                 break;
         }
-
     }
 }

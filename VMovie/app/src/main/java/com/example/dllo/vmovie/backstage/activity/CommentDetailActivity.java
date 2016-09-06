@@ -54,9 +54,8 @@ public class CommentDetailActivity extends BaseActivity implements OnClickListen
         mDetailAdapter = new CommentDetailAdapter(this);
         Intent intent = getIntent();
         String s = intent.getStringExtra("id");
-        int id = Integer.parseInt(s);
         //对评论的详情进行的解析
-        NetTool.getInstance().startRequest(NetUtil.COMMENT_LEFT + id + NetUtil.COMMENT_RIGHT, CommentDetailBean.class,
+        NetTool.getInstance().startRequest(NetUtil.COMMENT_LEFT + s + NetUtil.COMMENT_RIGHT, CommentDetailBean.class,
                 new OnHttpCallBack<CommentDetailBean>() {
                     @Override
                     public void onSuccess(CommentDetailBean response) {

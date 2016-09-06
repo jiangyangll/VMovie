@@ -55,7 +55,7 @@ public class NewFragment extends BaseFragment {
         customBanner = (BGABanner) headView.findViewById(R.id.banner_main_cube);
 
         //Banner轮播图实现
-        customViews = getViews(6);
+        customViews = getViews(8);
         customBanner.setViews(customViews);
 
         NetTool.getInstance().startRequest(NetUtil.NEWEST_RECYCLER, CarouselBean.class, new OnHttpCallBack<CarouselBean>() {
