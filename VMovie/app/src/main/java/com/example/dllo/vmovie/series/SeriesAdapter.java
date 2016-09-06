@@ -15,23 +15,29 @@ import com.bumptech.glide.Glide;
 import com.example.dllo.vmovie.R;
 import com.example.dllo.vmovie.series.SeriesAdapter.SeriesHolder;
 
+import java.util.List;
+
 /**
  * Created by dllo on 16/8/30.
  */
 public class SeriesAdapter extends Adapter<SeriesHolder>{
 
     private Context context;
-    private SeriesBean seriesBean;
+    private List<DataBean> dataBeanList;
 
     public SeriesAdapter(Context context) {
         this.context = context;
     }
 
-    public void setSeriesBean(SeriesBean seriesBean) {
-        this.seriesBean = seriesBean;
+    public void setDataBeanList(List<DataBean> dataBeanList) {
+        this.dataBeanList = dataBeanList;
         notifyDataSetChanged();
     }
 
+    public void addDataList(List<DataBean> dataBeanList){
+        this.dataBeanList.addAll(dataBeanList);
+        notifyDataSetChanged();
+    }
 
     @Override
     public SeriesHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -40,16 +46,16 @@ public class SeriesAdapter extends Adapter<SeriesHolder>{
 
     @Override
     public void onBindViewHolder(SeriesHolder holder, final int position) {
-        holder.tvTitle.setText(seriesBean.getData().get(position).getTitle());
-        holder.tvDes.setText("已更新至" + seriesBean.getData().get(position).getUpdate_to() + "集"
-        + "     " + seriesBean.getData().get(position).getFollower_num() + "人已订阅");
-        holder.tvContent.setText(seriesBean.getData().get(position).getContent());
-        Glide.with(context).load(seriesBean.getData().get(position).getImage()).into(holder.ivShow);
+        holder.tvTitle.setText(dataBeanList.get(position).getTitle());
+        holder.tvDes.setText("已更新至" + dataBeanList.get(position).getUpdate_to() + "集"
+        + "     " + dataBeanList.get(position).getFollower_num() + "人已订阅");
+        holder.tvContent.setText(dataBeanList.get(position).getContent());
+        Glide.with(context).load(dataBeanList.get(position).getImage()).into(holder.ivShow);
         holder.ivShow.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,SeriesDesActivity.class);
-                intent.putExtra("seriesId",seriesBean.getData().get(position).getSeriesid());
+                intent.putExtra("seriesId",dataBeanList.get(position).getSeriesid());
                 context.startActivity(intent);
             }
         });
@@ -57,7 +63,7 @@ public class SeriesAdapter extends Adapter<SeriesHolder>{
 
     @Override
     public int getItemCount() {
-        return seriesBean.getData().size();
+        return dataBeanList.size();
     }
 
     public class SeriesHolder extends ViewHolder{
