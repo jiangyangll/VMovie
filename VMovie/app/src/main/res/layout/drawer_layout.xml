@@ -39,6 +39,7 @@
             android:background="@mipmap/side_message" />
 
         <TextView
+            android:id="@+id/tv_drawer_click_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/iv_drawer_head_icon"

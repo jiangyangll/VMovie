@@ -1,11 +1,14 @@
 package com.example.dllo.vmovie;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AlertDialog.Builder;
 import android.view.Gravity;
 
 import android.view.MotionEvent;
@@ -13,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.KeyEvent;
 
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -26,21 +30,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
 import com.example.dllo.vmovie.base.BaseActivity;
 import com.example.dllo.vmovie.backstage.fragment.BackStageFragment;
 import com.example.dllo.vmovie.series.SeriesFragment;
 
+
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends BaseActivity implements OnTouchListener {
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
+
+
+public class MainActivity extends BaseActivity implements OnTouchListener, OnClickListener {
 
     private DrawerLayout drawerLayout;
     private ImageView clickDrawer, clickSearch;
     private RelativeLayout relativeDrawer, relativeDrawerHome, relativeDrawerSeries, relativeDrawerBehind;
     private ImageView ivHomeBlank, ivSeriesBlank, ivBehindBlank
-            , ivHomepage, ivSeries, ivBehind;
-    private TextView tvHomePage, tvSeries, tvBehind;
+            , ivHomepage, ivSeries, ivBehind, ivDrawerLogin;
+    private TextView tvHomePage, tvSeries, tvBehind, tvClickLogin;
+    private AlertDialog mDialog;
 
     @Override
     public int setLayout() {
@@ -68,6 +78,9 @@ public class MainActivity extends BaseActivity implements OnTouchListener {
         tvHomePage = (TextView) findViewById(R.id.tv_drawer_homepage);
         tvSeries = (TextView) findViewById(R.id.tv_drawer_series);
         tvBehind = (TextView) findViewById(R.id.tv_drawer_behind);
+        ivDrawerLogin = (ImageView) findViewById(R.id.iv_drawer_head_icon);
+        tvClickLogin = (TextView) findViewById(R.id.tv_drawer_click_login);
+        ivDrawerLogin.setOnClickListener(this);
         relativeDrawerHome.setOnTouchListener(this);
         relativeDrawerSeries.setOnTouchListener(this);
         relativeDrawerBehind.setOnTouchListener(this);
@@ -81,6 +94,7 @@ public class MainActivity extends BaseActivity implements OnTouchListener {
 
     @Override
     protected void initData() {
+        mDialog = createDialog();
         clickDrawer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -218,6 +232,58 @@ public class MainActivity extends BaseActivity implements OnTouchListener {
         } else {
             finish();
             System.exit(0);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_drawer_head_icon:
+                if (VMovieApplication.LOGIN_STATE == true) {
+                    mDialog.show();
+                }else{
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivityForResult(intent,100);
+                }
+                break;
+        }
+    }
+
+    private AlertDialog createDialog() {
+        AlertDialog.Builder builder = new Builder(this);
+        builder.setTitle("提示");
+        builder.setMessage("确定退出登录?");
+        builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                VMovieApplication.LOGIN_STATE = false;
+                ivDrawerLogin.setImageResource(R.mipmap.default_avatar);
+                tvClickLogin.setText("点击登录");
+            }
+        });
+        builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+        builder.setCancelable(false);
+        AlertDialog dialog = builder.create();
+        return dialog;
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == 200) {
+            tvClickLogin.setText(data.getStringExtra("userName"));
+            Glide.with(this).load(data.getStringExtra("headIcon")).bitmapTransform(new
+                    CropCircleTransformation(this)).into(ivDrawerLogin);
+        }else if (requestCode == 100 && resultCode == 300){
+            tvClickLogin.setText(data.getStringExtra("userName"));
+            Glide.with(this).load(data.getStringExtra("headIcon")).bitmapTransform(new
+                    CropCircleTransformation(this)).into(ivDrawerLogin);
         }
     }
 }

@@ -17,5 +17,13 @@
     <string name="check_al">查看全部</string>
     <string name="video_is_playing">正在播放</string>
     <string name="ellipsis">\u2026</string>
+    <string name="email_address">邮箱</string>
+    <string name="password">密码</string>
+    <string name="login">登录</string>
+    <string name="use_other_login">使用社交平台登录/注册</string>
+    <string name="vmovie">VMOVIE</string>
+    <string name="password_login">Password</string>
+    <string name="username_login">Email</string>
+    <string name="you_are_welcome">You are welcome !</string>
 
 </resources>
