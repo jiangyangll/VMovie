@@ -7,12 +7,16 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.example.dllo.vmovie.R;
 import com.example.dllo.vmovie.backstage.bean.AllDetailBean;
 import com.example.dllo.vmovie.base.BaseActivity;
 import com.example.dllo.vmovie.netutil.NetUtil;
 import com.example.dllo.vmovie.okhttptool.NetTool;
 import com.example.dllo.vmovie.okhttptool.OnHttpCallBack;
+
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 
 /**
  * Created by dllo on 16/8/31.
@@ -24,6 +28,7 @@ public class AllDetailActivity extends BaseActivity implements OnClickListener {
             image_bottom_share, image_comment;
     private WebView mWebView;
     private String postId;
+    private AllDetailBean mAllDetailBean;
 
     @Override
     public int setLayout() {
@@ -49,7 +54,7 @@ public class AllDetailActivity extends BaseActivity implements OnClickListener {
         mWebView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AllDetailActivity.this,AllDetailActivity.class);
+                Intent intent = new Intent(AllDetailActivity.this, AllDetailActivity.class);
                 startActivity(intent);
             }
         });
@@ -62,6 +67,7 @@ public class AllDetailActivity extends BaseActivity implements OnClickListener {
         NetTool.getInstance().startRequest(NetUtil.BACKSTAGE_DETAIL + postId, AllDetailBean.class, new OnHttpCallBack<AllDetailBean>() {
             @Override
             public void onSuccess(AllDetailBean response) {
+                mAllDetailBean = response;
                 tv_count_comment.setText(response.getData().getCount_comment());
                 tv_count_like.setText(response.getData().getCount_like());
                 tv_count_share.setText(response.getData().getCount_share());
@@ -85,17 +91,53 @@ public class AllDetailActivity extends BaseActivity implements OnClickListener {
                 finish();
                 break;
             case R.id.image_share:
+                showShare();
                 break;
             case R.id.image_side_likes:
                 break;
             case R.id.image_bottom_share:
+                showShare();
                 break;
             case R.id.image_comment:
                 Intent intent = new Intent(AllDetailActivity.this, CommentDetailActivity.class);
-                intent.putExtra("id",postId);
-                overridePendingTransition(R.anim.enter_anim,R.anim.exit_anim);
+                intent.putExtra("id", postId);
+                overridePendingTransition(R.anim.enter_anim, R.anim.exit_anim);
                 startActivity(intent);
                 break;
         }
     }
+
+
+    private void showShare() {
+        ShareSDK.initSDK(this);
+        OnekeyShare oks = new OnekeyShare();
+        //关闭sso授权
+        oks.disableSSOWhenAuthorize();
+
+        // 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
+        //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
+        // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+        oks.setTitle(mAllDetailBean.getData().getTitle());
+        // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+        oks.setTitleUrl(mAllDetailBean.getData().getShare_sub_title());
+        // text是分享文本，所有平台都需要这个字段
+        oks.setText(mAllDetailBean.getData().getTitle());
+        //分享网络图片，新浪微博分享网络图片需要通过审核后申请高级写入接口，否则请注释掉测试新浪微博
+        oks.setImageUrl(mAllDetailBean.getData().getImage());
+        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+        //oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+        // url仅在微信（包括好友和朋友圈）中使用
+        oks.setUrl(mAllDetailBean.getData().getShare_link().getWeixin());
+        // comment是我对这条分享的评论，仅在人人网和QQ空间使用
+        oks.setComment("挺不错哦!!!");
+        // site是分享此内容的网站名称，仅在QQ空间使用
+        oks.setSite("V电影");
+        // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+        oks.setSiteUrl(mAllDetailBean.getData().getShare_link().getQzone());
+
+        // 启动分享GUI
+        oks.show(this);
+    }
+
+
 }

@@ -5,7 +5,7 @@ import com.example.dllo.vmovie.base.BaseActivity;
 /**
  * Created by dllo on 16/8/30.
  */
-public class SearchActivity extends BaseActivity{
+public class SearchActivity extends BaseActivity {
 
     //搜索
     @Override
@@ -13,7 +13,8 @@ public class SearchActivity extends BaseActivity{
         return R.layout.activity_search;
     }
 
-    @Override    protected void initView() {
+    @Override
+    protected void initView() {
 
 
     }

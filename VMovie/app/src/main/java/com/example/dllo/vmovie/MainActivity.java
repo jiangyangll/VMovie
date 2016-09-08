@@ -2,6 +2,9 @@ package com.example.dllo.vmovie;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Handler.Callback;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,9 +16,12 @@ import android.view.MotionEvent;
 import android.view.KeyEvent;
 
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import android.widget.RelativeLayout;
@@ -33,13 +39,13 @@ import com.example.dllo.vmovie.series.SeriesFragment;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends BaseActivity implements OnTouchListener {
+public class MainActivity extends BaseActivity implements OnTouchListener, OnClickListener {
 
     private DrawerLayout drawerLayout;
     private ImageView clickDrawer, clickSearch;
     private RelativeLayout relativeDrawer, relativeDrawerHome, relativeDrawerSeries, relativeDrawerBehind;
     private ImageView ivHomeBlank, ivSeriesBlank, ivBehindBlank
-            , ivHomepage, ivSeries, ivBehind;
+            , ivHomepage, ivSeries, ivBehind,ivSideClose;
     private TextView tvHomePage, tvSeries, tvBehind;
 
     @Override
@@ -50,7 +56,7 @@ public class MainActivity extends BaseActivity implements OnTouchListener {
     @Override
     protected void initView() {
         relativeDrawer = (RelativeLayout) findViewById(R.id.relative_drawer);
-        relativeDrawer.setAlpha(255);
+
         relativeDrawerHome = (RelativeLayout) findViewById(R.id.relative_drawer_homepage);
         relativeDrawerSeries = (RelativeLayout) findViewById(R.id.relative_drawer_series);
         relativeDrawerBehind = (RelativeLayout) findViewById(R.id.relative_drawer_behind);
@@ -68,6 +74,8 @@ public class MainActivity extends BaseActivity implements OnTouchListener {
         tvHomePage = (TextView) findViewById(R.id.tv_drawer_homepage);
         tvSeries = (TextView) findViewById(R.id.tv_drawer_series);
         tvBehind = (TextView) findViewById(R.id.tv_drawer_behind);
+        ivSideClose = (ImageView) findViewById(R.id.iv_side_close);
+        ivSideClose.setOnClickListener(this);
         relativeDrawerHome.setOnTouchListener(this);
         relativeDrawerSeries.setOnTouchListener(this);
         relativeDrawerBehind.setOnTouchListener(this);
@@ -85,6 +93,8 @@ public class MainActivity extends BaseActivity implements OnTouchListener {
             @Override
             public void onClick(View view) {
                 drawerLayout.openDrawer(Gravity.LEFT);
+                Animation scale = AnimationUtils.loadAnimation(MainActivity.this,R.anim.expand_anim);
+                ivSideClose.startAnimation(scale);
             }
         });
 
@@ -218,6 +228,37 @@ public class MainActivity extends BaseActivity implements OnTouchListener {
         } else {
             finish();
             System.exit(0);
+        }
+    }
+
+    Handler mHandler = new Handler(new Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            drawerLayout.closeDrawer(relativeDrawer);
+            return false;
+        }
+    });
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_side_close:
+                Animation scale = AnimationUtils.loadAnimation(MainActivity.this,R.anim.scale_anim);
+                scale.setFillAfter(true);
+                ivSideClose.startAnimation(scale);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        mHandler.sendEmptyMessage(0);
+                    }
+                }).start();
+                break;
         }
     }
 }

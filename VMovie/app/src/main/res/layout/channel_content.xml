@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:vswitch="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -30,6 +32,25 @@
             android:layout_marginTop="@dimen/ten_dp"
             android:background="@mipmap/gray_share_icon" />
     </RelativeLayout>
+
+    <com.example.dllo.vmovie.customview.VerticalSwitchTextView
+        android:id="@+id/channel_content_VSTV"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fifty_dp"
+        android:layout_marginBottom="@dimen/ten_dp"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:background="@color/e_three_blue"
+        android:drawableLeft="@mipmap/horn"
+        android:drawablePadding="@dimen/ten_dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/ten_dp"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="20sp"
+        vswitch:alignment="center"
+        vswitch:idleDuaration="3000"
+        vswitch:switchDuaration="2000"
+        vswitch:switchOrientation="up" />
 
     <WebView
         android:id="@+id/channel_content_webView"
