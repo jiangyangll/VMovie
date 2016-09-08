@@ -20,4 +20,7 @@
     <color name="forthColor">#00FFFF</color>
 
     <color name="e_three_blue">#e3fffe</color>
+    <color name="bg_white">#FFFFFF</color>
+    <color name="bg_gray">#C5C9CC</color>
+    <color name="font_gray">#A6AFC6</color>
 </resources>

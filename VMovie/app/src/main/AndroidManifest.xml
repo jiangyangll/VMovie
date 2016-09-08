@@ -23,7 +23,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
 
     <application
         android:name=".VMovieApplication"
@@ -53,6 +54,7 @@
         <activity android:name=".home.CarouselActivity"/>
         <activity android:name=".backstage.activity.CommentDetailActivity"/>
         <activity android:name=".series.SeriesDesActivity"/>
+        <activity android:name=".LoginActivity"/>
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"

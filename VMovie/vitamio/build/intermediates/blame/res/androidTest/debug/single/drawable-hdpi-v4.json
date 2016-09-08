@@ -1,6 +1,11 @@
 [
     {
+<<<<<<< HEAD
         "merged": "/Users/dllo/Desktop/GitDemo/VMovie/VMovie/vitamio/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/ic_launcher.png",
         "source": "/Users/dllo/Desktop/GitDemo/VMovie/VMovie/vitamio/build/intermediates/bundles/debug/res/drawable-hdpi-v4/ic_launcher.png"
+=======
+        "merged": "/Users/dllo/Desktop/gitDownload/VMovie/VMovie/vitamio/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/ic_launcher.png",
+        "source": "/Users/dllo/Desktop/gitDownload/VMovie/VMovie/vitamio/build/intermediates/bundles/debug/res/drawable-hdpi-v4/ic_launcher.png"
+>>>>>>> b1374f04fe82d7ca44c8919628d800b0562ebdcf
     }
 ]
