@@ -38,7 +38,6 @@ public class AllFragment extends BaseFragment {
     @Override
     protected void initView(View view) {
         mListView = (ListView) view.findViewById(R.id.listView);
-
     }
 
     @Override
@@ -79,6 +78,5 @@ public class AllFragment extends BaseFragment {
             position = args.getInt(KEY_POSITION);
             return position;
         } else return 0;
-
     }
 }

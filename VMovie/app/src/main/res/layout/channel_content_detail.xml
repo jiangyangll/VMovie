@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="@dimen/fifty_dp"
     android:background="@android:color/black"
     android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/image_back"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="10dp"
+        android:layout_width="@dimen/thirty_dp"
+        android:layout_height="@dimen/thirty_dp"
+        android:layout_marginLeft="@dimen/ten_dp"
         android:layout_gravity="center_vertical"
         android:background="@mipmap/video_lan_back"/>
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/fifty_dp"
         android:gravity="center"
         android:text="幕后文章"
-        android:textSize="20sp"
+        android:textSize="@dimen/twenty_sp"
         android:textColor="@android:color/white"/>
     <ImageView
         android:id="@+id/image_share"
-        android:layout_marginRight="10dp"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_marginRight="@dimen/ten_dp"
+        android:layout_width="@dimen/thirty_dp"
+        android:layout_height="@dimen/thirty_dp"
         android:layout_gravity="right|center_vertical"
         android:background="@mipmap/gray_share_icon"/>
 </FrameLayout>

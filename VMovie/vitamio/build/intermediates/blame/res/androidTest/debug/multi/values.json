@@ -277,8 +277,8 @@
                     "startLine": 19,
                     "startColumn": 4,
                     "startOffset": 1240,
-                    "endColumn": 72,
-                    "endOffset": 1308
+                    "endColumn": 50,
+                    "endOffset": 1286
                 },
                 "from": {
                     "file": "/Users/dllo/Desktop/GitDemo/VMovie/VMovie/vitamio/build/intermediates/bundles/debug/res/values/values.xml",
@@ -286,8 +286,8 @@
                         "startLine": 19,
                         "startColumn": 4,
                         "startOffset": 1240,
-                        "endColumn": 72,
-                        "endOffset": 1308
+                        "endColumn": 50,
+                        "endOffset": 1286
                     }
                 }
             },
@@ -295,18 +295,18 @@
                 "to": {
                     "startLine": 20,
                     "startColumn": 4,
-                    "startOffset": 1313,
-                    "endColumn": 67,
-                    "endOffset": 1376
+                    "startOffset": 1291,
+                    "endColumn": 72,
+                    "endOffset": 1359
                 },
                 "from": {
                     "file": "/Users/dllo/Desktop/GitDemo/VMovie/VMovie/vitamio/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 20,
                         "startColumn": 4,
-                        "startOffset": 1313,
-                        "endColumn": 67,
-                        "endOffset": 1376
+                        "startOffset": 1291,
+                        "endColumn": 72,
+                        "endOffset": 1359
                     }
                 }
             },
@@ -314,41 +314,60 @@
                 "to": {
                     "startLine": 21,
                     "startColumn": 4,
-                    "startOffset": 1381,
-                    "endLine": 30,
-                    "endColumn": 12,
-                    "endOffset": 2023
+                    "startOffset": 1364,
+                    "endColumn": 67,
+                    "endOffset": 1427
                 },
                 "from": {
                     "file": "/Users/dllo/Desktop/GitDemo/VMovie/VMovie/vitamio/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 21,
                         "startColumn": 4,
-                        "startOffset": 1381,
-                        "endLine": 30,
-                        "endColumn": 12,
-                        "endOffset": 2023
+                        "startOffset": 1364,
+                        "endColumn": 67,
+                        "endOffset": 1427
                     }
                 }
             },
             {
                 "to": {
-                    "startLine": 31,
+                    "startLine": 22,
                     "startColumn": 4,
-                    "startOffset": 2028,
-                    "endLine": 35,
+                    "startOffset": 1432,
+                    "endLine": 31,
                     "endColumn": 12,
-                    "endOffset": 2233
+                    "endOffset": 2074
                 },
                 "from": {
                     "file": "/Users/dllo/Desktop/GitDemo/VMovie/VMovie/vitamio/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
-                        "startLine": 31,
+                        "startLine": 22,
                         "startColumn": 4,
-                        "startOffset": 2028,
-                        "endLine": 35,
+                        "startOffset": 1432,
+                        "endLine": 31,
                         "endColumn": 12,
-                        "endOffset": 2233
+                        "endOffset": 2074
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 32,
+                    "startColumn": 4,
+                    "startOffset": 2079,
+                    "endLine": 36,
+                    "endColumn": 12,
+                    "endOffset": 2284
+                },
+                "from": {
+                    "file": "/Users/dllo/Desktop/GitDemo/VMovie/VMovie/vitamio/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 32,
+                        "startColumn": 4,
+                        "startOffset": 2079,
+                        "endLine": 36,
+                        "endColumn": 12,
+                        "endOffset": 2284
                     }
                 }
             }

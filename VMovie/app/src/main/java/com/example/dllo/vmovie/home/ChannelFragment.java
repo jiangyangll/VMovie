@@ -53,20 +53,25 @@ public class ChannelFragment extends BaseFragment {
                         String cateName = null;
                         int cateId;
                         String url = null;
+                        String loadUrl = null;
 
                         if (position == 0) {
                             cateName = "热门";
                             url = NetUtil.CHANNEL_HOT;
+                            loadUrl = NetUtil.CHANNEL_HOT_LEFT;
                         } else if (position == 1) {
                             cateName = "专题";
                             url = NetUtil.CHANNEL_SPECIAL;
+                            loadUrl = NetUtil.CHANNEL_SPECIAL_LEFT;
                         } else {
                             cateName = response.getData().get(position - 2).getCatename();
                             cateId = Integer.valueOf(response.getData().get(position - 2).getCateid());
                             url = NetUtil.CHANNEL_DETAIL_LEFT + cateId + NetUtil.CHANNEL_DETAIL_RIGHT;
+                            loadUrl = NetUtil.CHANNEL_DETAIL_THIS_LEFT + cateId + NetUtil.CHANNEL_DETAIL_THIS_CENTER;
                         }
                         intent.putExtra("catename", cateName);
                         intent.putExtra("url",url);
+                        intent.putExtra("loadUrl",loadUrl);
                         startActivity(intent);
                     }
                 });

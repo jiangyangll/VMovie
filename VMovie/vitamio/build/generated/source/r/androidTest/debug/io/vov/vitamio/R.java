@@ -49,8 +49,9 @@ public final class R {
 		public static final int permission_receive_messages_label = 0x7f050008;
 		public static final int permission_write_providers_description = 0x7f050009;
 		public static final int permission_write_providers_label = 0x7f05000a;
-		public static final int vitamio_init_decoders = 0x7f05000b;
-		public static final int vitamio_library_app_name = 0x7f05000c;
+		public static final int rating_to_movie = 0x7f05000b;
+		public static final int vitamio_init_decoders = 0x7f05000c;
+		public static final int vitamio_library_app_name = 0x7f05000d;
 	}
 	public static final class style {
 		public static final int MediaController_SeekBar = 0x7f060000;

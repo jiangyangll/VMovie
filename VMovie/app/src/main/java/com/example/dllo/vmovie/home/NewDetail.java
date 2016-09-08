@@ -4,16 +4,23 @@ import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dllo.vmovie.R;
 import com.example.dllo.vmovie.base.BaseActivity;
+import com.example.dllo.vmovie.like.LikeFilmBean;
+import com.example.dllo.vmovie.liteormtool.LiteOrmManager;
 import com.example.dllo.vmovie.netutil.NetUtil;
 import com.example.dllo.vmovie.okhttptool.NetTool;
 import com.example.dllo.vmovie.okhttptool.OnHttpCallBack;
+import com.litesuits.orm.db.assit.QueryBuilder;
+
+import java.util.List;
 
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.Vitamio;
@@ -30,6 +37,14 @@ public class NewDetail extends BaseActivity {
     private TextView like, share, comment;
     private ImageView likeImage, shareImage, commentImage, cacheImage, videoBackImg, videoShareImg;
     private VideoView videoView;
+    private String title;
+    private String duration;
+    private String shareNum;
+    private String ratingNum;
+    private String imageUrl;
+
+    private boolean flag = false;
+    private LikeFilmBean filmBean;
 
     @Override
     public int setLayout() {
@@ -56,6 +71,8 @@ public class NewDetail extends BaseActivity {
     @Override
     protected void initData() {
 
+        likeImage.setImageResource(R.mipmap.side_likes);
+
         Intent intent = getIntent();
         final String postId = intent.getStringExtra("postId");
 
@@ -63,7 +80,6 @@ public class NewDetail extends BaseActivity {
             @Override
             public void onSuccess(NewDetailBean response) {
                 String url = response.getData().getContent().getVideo().get(0).getQiniu_url();
-                Log.d("NewDetail", url);
 
                 videoView.setVideoURI(Uri.parse(url));
                 videoView.setMediaController(new MediaController(getApplicationContext()));
@@ -76,9 +92,16 @@ public class NewDetail extends BaseActivity {
                         mediaPlayer.setPlaybackSpeed(1.0f);
                     }
                 });
-
                 like.setText(response.getData().getCount_like());
                 share.setText(response.getData().getCount_share());
+
+                //获取数据存储于数据库中
+                title = response.getData().getTitle();
+                duration = response.getData().getContent().getVideo().get(0).getDuration();
+                shareNum = response.getData().getCount_share();
+                ratingNum = response.getData().getRating();
+                imageUrl = response.getData().getImage();
+
             }
 
             @Override
@@ -129,5 +152,28 @@ public class NewDetail extends BaseActivity {
             }
         });
 
+        //判断状态,如果没有
+//        if (LiteOrmManager.getInstance().queryByWhere(LikeFilmBean.class, LikeFilmBean.title) == null) {
+//            flag = true;
+//            likeImage.setImageResource(R.mipmap.like_image);
+//        }
+
+        likeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!flag) {
+                    likeImage.setImageResource(R.mipmap.like_image);
+                    filmBean = new LikeFilmBean(title, duration, shareNum, ratingNum, imageUrl, postId);
+                    LiteOrmManager.getInstance().insert(filmBean);
+                    Toast.makeText(NewDetail.this, "有品位~", Toast.LENGTH_SHORT).show();
+                    flag = true;
+                } else {
+                    likeImage.setImageResource(R.mipmap.side_likes);
+                    LiteOrmManager.getInstance().delete(filmBean);
+                    Toast.makeText(NewDetail.this, "品位变了~", Toast.LENGTH_SHORT).show();
+                    flag = false;
+                }
+            }
+        });
     }
 }

@@ -11,6 +11,9 @@ import android.widget.Toast;
 import com.example.dllo.vmovie.R;
 import com.example.dllo.vmovie.base.BaseActivity;
 import com.example.dllo.vmovie.customview.VerticalSwitchTextView;
+import com.example.dllo.vmovie.like.LikeBackstageBean;
+import com.example.dllo.vmovie.like.LikeFilmBean;
+import com.example.dllo.vmovie.liteormtool.LiteOrmManager;
 import com.example.dllo.vmovie.netutil.NetUtil;
 import com.example.dllo.vmovie.okhttptool.NetTool;
 import com.example.dllo.vmovie.okhttptool.OnHttpCallBack;
@@ -36,6 +39,15 @@ public class ChannelContentActivity extends BaseActivity {
 
     private VerticalSwitchTextView vsTv;
     private ArrayList<String> list;
+
+    private String title;
+    private String duration;
+    private String shareNum;
+    private String ratingNum;
+    private String imageUrl;
+
+    private boolean flag = false;
+    private LikeFilmBean filmBean;
 
     @Override
     public int setLayout() {
@@ -67,9 +79,10 @@ public class ChannelContentActivity extends BaseActivity {
     @Override
     protected void initData() {
 
+        likeImage.setImageResource(R.mipmap.side_likes);
+
         Intent intent = getIntent();
         final String postId = intent.getStringExtra("postId");
-        int postid = Integer.valueOf(postId);
 
         String shareNumber = intent.getStringExtra("shareNumber");
         String likeNumber = intent.getStringExtra("likeNumber");
@@ -77,7 +90,7 @@ public class ChannelContentActivity extends BaseActivity {
         share.setText(shareNumber);
         like.setText(likeNumber);
 
-        String url = NetUtil.WEB_LEFT + postid + NetUtil.WEB_RIGHT;
+        String url = NetUtil.WEB_LEFT + postId + NetUtil.WEB_RIGHT;
         webView.loadUrl(url);
 
         commentImage.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +102,7 @@ public class ChannelContentActivity extends BaseActivity {
             }
         });
 
-        NetTool.getInstance().startRequest(NetUtil.COMMENT_LEFT + postid + NetUtil.COMMENT_RIGHT, CommentBean.class, new OnHttpCallBack<CommentBean>() {
+        NetTool.getInstance().startRequest(NetUtil.COMMENT_LEFT + postId + NetUtil.COMMENT_RIGHT, CommentBean.class, new OnHttpCallBack<CommentBean>() {
             @Override
             public void onSuccess(CommentBean response) {
                 comment.setText(response.getTotal_num());
@@ -114,10 +127,16 @@ public class ChannelContentActivity extends BaseActivity {
             }
         });
 
-        NetTool.getInstance().startRequest(NetUtil.NEWEST_DETAIL_LEFT + postid + NetUtil.NEWEST_DETAIL_RIGHT, ChannelContentBean.class, new OnHttpCallBack<ChannelContentBean>() {
+        NetTool.getInstance().startRequest(NetUtil.NEWEST_DETAIL_LEFT + postId + NetUtil.NEWEST_DETAIL_RIGHT, ChannelContentBean.class, new OnHttpCallBack<ChannelContentBean>() {
             @Override
             public void onSuccess(ChannelContentBean response) {
                 String url = response.getData().getContent().getVideo().get(0).getQiniu_url();
+
+                title = response.getData().getTitle();
+                duration = response.getData().getContent().getVideo().get(0).getDuration();
+                shareNum = response.getData().getCount_share();
+                ratingNum = response.getData().getRating();
+                imageUrl = response.getData().getImage();
 
                 videoView.setVideoURI(Uri.parse(url));
                 videoView.setMediaController(new MediaController(getApplicationContext()));
@@ -134,11 +153,28 @@ public class ChannelContentActivity extends BaseActivity {
 
             @Override
             public void onError(Throwable e) {
-
             }
         });
 
-        list = new ArrayList<>(Arrays.asList("无线你的无限  英特尔","世界因为不同","只要有梦想  凡事可成真","世界因你而广阔","极速炫彩  掌控天下  霸气十足","天下有双  驰骋世界","人生本有无数可能 让可能变成现实","俯视天下  智握巅峰","奇迹世界  由你掌控"));
+        likeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!flag) {
+                    likeImage.setImageResource(R.mipmap.like_image);
+                    filmBean = new LikeFilmBean(title, duration, shareNum, ratingNum, imageUrl, postId);
+                    LiteOrmManager.getInstance().insert(filmBean);
+                    Toast.makeText(ChannelContentActivity.this, "有品位~", Toast.LENGTH_SHORT).show();
+                    flag = true;
+                } else {
+                    likeImage.setImageResource(R.mipmap.side_likes);
+                    LiteOrmManager.getInstance().delete(filmBean);
+                    Toast.makeText(ChannelContentActivity.this, "品位变了~", Toast.LENGTH_SHORT).show();
+                    flag = false;
+                }
+            }
+        });
+
+        list = new ArrayList<>(Arrays.asList("无线你的无限  英特尔", "世界因为不同", "只要有梦想  凡事可成真", "世界因你而广阔", "极速炫彩  掌控天下  霸气十足", "天下有双  驰骋世界", "人生本有无数可能 让可能变成现实", "俯视天下  智握巅峰", "奇迹世界  由你掌控"));
         vsTv.setTextContent(list);
     }
 }

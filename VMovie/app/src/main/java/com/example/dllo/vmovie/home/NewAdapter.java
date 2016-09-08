@@ -2,6 +2,7 @@ package com.example.dllo.vmovie.home;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,8 @@ public class NewAdapter extends RecyclerView.Adapter {
     private Context context;
     private OnRecyclerItemClickListener listener;
 
+    public static int countP;
+
     public NewAdapter(Context context) {
         this.context = context;
     }
@@ -39,44 +42,46 @@ public class NewAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new NewHolder(LayoutInflater.from(context).inflate(R.layout.item_new,parent,false));
+    public int getItemCount() {
+        countP = bean.getData().size() / 10 + 1;
+        return bean.getData().size() + 1;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new NewHolder(LayoutInflater.from(context).inflate(R.layout.item_new, parent, false));
+    }
+
+    @Override
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         final NewHolder newHolder = (NewHolder) holder;
-        newHolder.titleShow.setText(bean.getData().get(position).getTitle());
-        newHolder.cateNameShow.setText(bean.getData().get(position).getCates().get(0).getCatename());
+        if (position < bean.getData().size()) {
 
-        //处理
+            newHolder.titleShow.setText(bean.getData().get(position).getTitle());
+            newHolder.cateNameShow.setText(bean.getData().get(position).getCates().get(0).getCatename());
 
-        String publish = bean.getData().get(position).getDuration();
-        int a = Integer.valueOf(publish);
+            //处理
+            String publish = bean.getData().get(position).getDuration();
+            int a = Integer.valueOf(publish);
 //        Date date = new Date(1472141100000L);
-        Date date = new Date(a * 1000L);
-        DateFormat format = new SimpleDateFormat("mm′ss″");
-        String time = format.format(date);
-        newHolder.publishTimeShow.setText(time);
+            Date date = new Date(a * 1000L);
+            DateFormat format = new SimpleDateFormat("mm′ss″");
+            String time = format.format(date);
+            newHolder.publishTimeShow.setText(time);
 
-        Glide.with(context).load(bean.getData().get(position).getImage()).into(newHolder.imageView);
-
-        if (listener != null){
+            Glide.with(context).load(bean.getData().get(position).getImage()).into(newHolder.imageView);
+        }
+        if (listener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                     int clickPosition = newHolder.getAdapterPosition();
 
-                    listener.onItemClick(v,newHolder,clickPosition);
+                    listener.onItemClick(v, newHolder, clickPosition);
                 }
             });
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return bean.getData().size();
     }
 
     public class NewHolder extends RecyclerView.ViewHolder {
@@ -92,7 +97,24 @@ public class NewAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public interface OnRecyclerItemClickListener{
+    public void addItem(NewBean bean) {
+        if (bean != null){
+            this.bean.getData().add(bean.getData().get(0));
+        }
+        notifyDataSetChanged();
+    }
+
+    public void addMoreItem(NewBean bean) {
+        if (bean != null){
+            for (int i = 0; i < bean.getData().size(); i++) {
+                this.bean.getData().add(bean.getData().get(i));
+            }
+            notifyDataSetChanged();
+        }
+
+    }
+
+    public interface OnRecyclerItemClickListener {
         void onItemClick(View view, NewHolder newHolder, int position);
     }
 }

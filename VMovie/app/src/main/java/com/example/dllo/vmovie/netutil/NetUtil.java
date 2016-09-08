@@ -12,7 +12,7 @@ public class NetUtil {
     //最新轮播图
     public static final String NEWEST_RECYCLER = "http://app.vmoiver.com/apiv3/index/getBanner";
     // 轮播图详情拼接参数 判断轮播图app_banner_type种类，type=2 的参数是 app_banner_param:49843
-    public static final String BannerDescriptionHead =  "http://app.vmoiver.com/";
+    public static final String BannerDescriptionHead = "http://app.vmoiver.com/";
     public static final String BannerDescriptionTail = "?qingapp=app_new";
     //频道
     public static final String CHANNEl = "http://app.vmoiver.com/apiv3/cate/getList";
@@ -87,4 +87,14 @@ public class NetUtil {
     public static final String CHANNEL_HOT_PIC = "http://cs.vmoiver.com/Uploads/Activity/2016-04-26/571ed9b5d2e44.jpg";
     public static final String CHANNEL_SPECIAL_PIC = "http://cs.vmoiver.com/Uploads/Activity/2016-04-27/5720601258d7f.jpg";
 
+    //首页-频道-下拉上拉
+    //热门
+    public static final String CHANNEL_HOT_LEFT = "http://app.vmoiver.com/apiv3/post/getPostByTab?p=";
+    public static final String CHANNEL_HOT_RIGHT = "&tab=hot";
+    //专题
+    public static final String CHANNEL_SPECIAL_LEFT = "http://app.vmoiver.com/apiv3/post/getPostByTab?p=";
+    public static final String CHANNEL_SPECIAL_RIGHT = "&tab=album";
+    //创意以下
+    public static final String CHANNEL_DETAIL_THIS_LEFT = "http://app.vmoiver.com/apiv3/post/getPostInCate?cateid=";
+    public static final String CHANNEL_DETAIL_THIS_CENTER = "&p=";
 }

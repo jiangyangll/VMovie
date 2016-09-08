@@ -23,6 +23,9 @@ import com.example.dllo.vmovie.okhttptool.OnHttpCallBack;
  * 年轻的战场
  */
 public class CommentDetailActivity extends BaseActivity implements OnClickListener {
+
+    //幕后-幕后文章-详情-评论
+
     private TextView tv_total_num, tv_none_comment;
     private ImageView image_comment_down_arrow, image_back, image_share;
     private Button btn_send;

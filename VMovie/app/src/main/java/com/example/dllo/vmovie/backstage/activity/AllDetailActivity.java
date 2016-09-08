@@ -6,11 +6,14 @@ import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dllo.vmovie.R;
 import com.example.dllo.vmovie.backstage.bean.AllDetailBean;
 import com.example.dllo.vmovie.backstage.bean.CommentDetailBean;
 import com.example.dllo.vmovie.base.BaseActivity;
+import com.example.dllo.vmovie.like.LikeBackstageBean;
+import com.example.dllo.vmovie.liteormtool.LiteOrmManager;
 import com.example.dllo.vmovie.netutil.NetUtil;
 import com.example.dllo.vmovie.okhttptool.NetTool;
 import com.example.dllo.vmovie.okhttptool.OnHttpCallBack;
@@ -20,12 +23,21 @@ import com.example.dllo.vmovie.okhttptool.OnHttpCallBack;
  * 年轻的战场
  */
 public class AllDetailActivity extends BaseActivity implements OnClickListener {
+
+    //幕后-幕后文章-详情
     private TextView tv_count_like, tv_count_share, tv_count_comment;
     private ImageView image_back, image_share, image_side_likes,
             image_bottom_share, image_comment;
     private WebView mWebView;
-    private int id;
     private String newId;
+
+    private String title;
+    private String shareNum;
+    private String likeNum;
+    private String imageUrl;
+
+    private boolean flag = false;
+    private LikeBackstageBean backstageBean;
 
     @Override
     public int setLayout() {
@@ -48,29 +60,33 @@ public class AllDetailActivity extends BaseActivity implements OnClickListener {
         image_bottom_share.setOnClickListener(this);
         image_comment.setOnClickListener(this);
         mWebView = (WebView) findViewById(R.id.webView);
-
     }
 
     @Override
     protected void initData() {
+
+        image_side_likes.setImageResource(R.mipmap.side_likes);
+
         Intent intent = getIntent();
         newId = intent.getStringExtra("id");
-        id = Integer.parseInt(newId);
-        NetTool.getInstance().startRequest(NetUtil.BACKSTAGE_DETAIL + id, AllDetailBean.class, new OnHttpCallBack<AllDetailBean>() {
+        NetTool.getInstance().startRequest(NetUtil.BACKSTAGE_DETAIL + newId, AllDetailBean.class, new OnHttpCallBack<AllDetailBean>() {
             @Override
             public void onSuccess(AllDetailBean response) {
                 tv_count_comment.setText(response.getData().getCount_comment());
                 tv_count_like.setText(response.getData().getCount_like());
                 tv_count_share.setText(response.getData().getCount_share());
+
+                title = response.getData().getTitle();
+                shareNum = response.getData().getCount_share();
+                likeNum = response.getData().getCount_like();
+                imageUrl = response.getData().getImage();
             }
 
             @Override
             public void onError(Throwable e) {
-
             }
         });
-
-        mWebView.loadUrl(NetUtil.WEB_LEFT + id + NetUtil.WEB_RIGHT);
+        mWebView.loadUrl(NetUtil.WEB_LEFT + newId + NetUtil.WEB_RIGHT);
     }
 
     @Override
@@ -82,16 +98,27 @@ public class AllDetailActivity extends BaseActivity implements OnClickListener {
             case R.id.image_share:
                 break;
             case R.id.image_side_likes:
+                if (!flag) {
+                    image_side_likes.setImageResource(R.mipmap.like_image);
+                    backstageBean = new LikeBackstageBean(newId, title, imageUrl, shareNum, likeNum);
+                    LiteOrmManager.getInstance().insert(backstageBean);
+                    Toast.makeText(this, "有品位~", Toast.LENGTH_SHORT).show();
+                    flag = true;
+                } else {
+                    image_side_likes.setImageResource(R.mipmap.side_likes);
+                    LiteOrmManager.getInstance().delete(backstageBean);
+                    Toast.makeText(this, "品位变了~", Toast.LENGTH_SHORT).show();
+                    flag = false;
+                }
                 break;
             case R.id.image_bottom_share:
                 break;
             case R.id.image_comment:
                 Intent intent = new Intent(AllDetailActivity.this, CommentDetailActivity.class);
-                intent.putExtra("id",newId);
-                overridePendingTransition(R.anim.enter_anim,R.anim.exit_anim);
+                intent.putExtra("id", newId);
+                overridePendingTransition(R.anim.enter_anim, R.anim.exit_anim);
                 startActivity(intent);
                 break;
         }
-
     }
 }

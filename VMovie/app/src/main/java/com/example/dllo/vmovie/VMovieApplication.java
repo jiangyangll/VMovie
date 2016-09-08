@@ -12,6 +12,10 @@ public class VMovieApplication extends Application{
 
     protected static Context context;
 
+    public static Context getContext() {
+        return context;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -19,6 +23,5 @@ public class VMovieApplication extends Application{
         context = this;
 
         Fresco.initialize(this);
-
     }
 }

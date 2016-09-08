@@ -26,8 +26,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/thirty_dp"
             android:layout_toLeftOf="@+id/iv_drawer_head_icon"
-            android:background="@mipmap/side_set"
-            android:clickable="true" />
+            android:background="@mipmap/side_set" />
 
         <ImageView
             android:id="@+id/iv_drawer_message"
@@ -121,10 +120,10 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/like_drawer_relative"
             android:layout_width="@dimen/zero_dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true">
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/iv_drawer_my_like"
@@ -197,8 +196,8 @@
             android:layout_height="@dimen/fifty_dp"
             android:background="@android:color/white"
             android:layout_centerVertical="true"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
+
         <ImageView
             android:id="@+id/iv_drawer_series"
             android:layout_width="@dimen/thirty_dp"

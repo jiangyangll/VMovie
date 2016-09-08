@@ -86,7 +86,6 @@ public class HomePagerFragment extends BaseFragment {
         //添加点击事件
         newTv.setOnClickListener(new MyOnClickListener(0));
         channelTv.setOnClickListener(new MyOnClickListener(1));
-
     }
 
     /**

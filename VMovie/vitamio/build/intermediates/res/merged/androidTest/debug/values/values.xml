@@ -17,6 +17,7 @@
     <string name="permission_write_providers_description">Delete, update or create new items in Vitamio providers.
     </string>
     <string name="permission_write_providers_label">Write Vitamio providers</string>
+    <string name="rating_to_movie">给V电影评分</string>
     <string name="vitamio_init_decoders">Initializing decoders…</string>
     <string name="vitamio_library_app_name">VitamioLibrary</string>
     <style name="MediaController_SeekBar" parent="android:Widget.SeekBar">

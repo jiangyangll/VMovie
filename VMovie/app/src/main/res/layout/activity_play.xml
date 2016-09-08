@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fifty_dp"
+        android:background="@android:color/black"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/play_back"
+            android:layout_width="@dimen/thirty_dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/ten_dp"
+            android:layout_marginLeft="@dimen/ten_dp"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:background="@mipmap/video_lan_back" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/play_setting"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/seventeen_sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/play_rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sixty_dp"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/twenty_dp"
+            android:text="@string/play_debug_model"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/fifteen_sp" />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/ten_dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/ten_dp"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:text="@string/open_use_change_play" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:text="@string/more_helper"
+            android:textColor="@android:color/holo_blue_light" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

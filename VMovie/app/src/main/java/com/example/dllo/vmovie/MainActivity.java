@@ -28,7 +28,10 @@ import android.widget.Toast;
 
 import com.example.dllo.vmovie.base.BaseActivity;
 import com.example.dllo.vmovie.backstage.fragment.BackStageFragment;
+import com.example.dllo.vmovie.like.LikeActivity;
+import com.example.dllo.vmovie.search.SearchActivity;
 import com.example.dllo.vmovie.series.SeriesFragment;
+import com.example.dllo.vmovie.setting.SettingActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -37,9 +40,8 @@ public class MainActivity extends BaseActivity implements OnTouchListener {
 
     private DrawerLayout drawerLayout;
     private ImageView clickDrawer, clickSearch;
-    private RelativeLayout relativeDrawer, relativeDrawerHome, relativeDrawerSeries, relativeDrawerBehind;
-    private ImageView ivHomeBlank, ivSeriesBlank, ivBehindBlank
-            , ivHomepage, ivSeries, ivBehind;
+    private RelativeLayout relativeDrawer, relativeDrawerHome, relativeDrawerSeries, relativeDrawerBehind, relativeDrawerLike;
+    private ImageView ivHomeBlank, ivSeriesBlank, ivBehindBlank, ivHomepage, ivSeries, ivBehind, ivSetting;
     private TextView tvHomePage, tvSeries, tvBehind;
 
     @Override
@@ -54,11 +56,15 @@ public class MainActivity extends BaseActivity implements OnTouchListener {
         relativeDrawerHome = (RelativeLayout) findViewById(R.id.relative_drawer_homepage);
         relativeDrawerSeries = (RelativeLayout) findViewById(R.id.relative_drawer_series);
         relativeDrawerBehind = (RelativeLayout) findViewById(R.id.relative_drawer_behind);
+
+        relativeDrawerLike = (RelativeLayout) findViewById(R.id.like_drawer_relative);
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         drawerLayout.setAlpha(255);
         clickDrawer = (ImageView) findViewById(R.id.click_drawerAble);
         clickSearch = (ImageView) findViewById(R.id.click_search);
 
+        ivSetting = (ImageView) findViewById(R.id.iv_drawer_setting);
         ivHomeBlank = (ImageView) findViewById(R.id.iv_drawer_homepage_blank);
         ivSeriesBlank = (ImageView) findViewById(R.id.iv_drawer_series_blank);
         ivBehindBlank = (ImageView) findViewById(R.id.iv_drawer_behind_blank);
@@ -75,7 +81,7 @@ public class MainActivity extends BaseActivity implements OnTouchListener {
         ivHomeBlank.setVisibility(View.VISIBLE);
         ivHomepage.setImageResource(R.mipmap.side_home);
         tvHomePage.setTextColor(Color.WHITE);
-        replaceFragment(R.id.fragment_replace,new HomePagerFragment());
+        replaceFragment(R.id.fragment_replace, new HomePagerFragment());
 
     }
 
@@ -95,6 +101,23 @@ public class MainActivity extends BaseActivity implements OnTouchListener {
                 startActivity(intent);
             }
         });
+
+        relativeDrawerLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LikeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ivSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+
         WindowManager windowManager = this.getWindowManager();
         int drawerWidth = windowManager.getDefaultDisplay().getWidth();
         int drawerHeight = windowManager.getDefaultDisplay().getHeight();
@@ -105,7 +128,6 @@ public class MainActivity extends BaseActivity implements OnTouchListener {
 
         replaceFragment(R.id.fragment_replace, new HomePagerFragment());
     }
-
 
     public void replaceFragment(int id, Fragment fragment) {
         FragmentManager manager = getSupportFragmentManager();

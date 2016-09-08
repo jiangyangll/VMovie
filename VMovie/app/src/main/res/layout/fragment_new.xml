@@ -4,9 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.example.dllo.vmovie.customview.WrapRecyclerView
-        android:id="@+id/new_recycler"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/new_swipeRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <com.example.dllo.vmovie.customview.WrapRecyclerView
+            android:id="@+id/new_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

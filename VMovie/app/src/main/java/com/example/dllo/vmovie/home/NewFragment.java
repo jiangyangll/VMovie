@@ -3,10 +3,14 @@ package com.example.dllo.vmovie.home;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.dllo.vmovie.R;
 import com.example.dllo.vmovie.base.BaseFragment;
@@ -29,10 +33,13 @@ public class NewFragment extends BaseFragment {
     //最新
     private WrapRecyclerView recyclerView;
     private NewAdapter adapter;
-    private RecyclerView.LayoutManager manager;
+    private LinearLayoutManager manager;
 
     private BGABanner customBanner;
     private List<View> customViews = new ArrayList<>();
+
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private int lastVisibleItem;
 
     @Override
     protected int setLayout() {
@@ -42,6 +49,7 @@ public class NewFragment extends BaseFragment {
     @Override
     protected void initView(View view) {
         recyclerView = (WrapRecyclerView) view.findViewById(R.id.new_recycler);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.new_swipeRefresh);
     }
 
     @Override
@@ -50,12 +58,19 @@ public class NewFragment extends BaseFragment {
         recyclerView.setLayoutManager(manager);
         adapter = new NewAdapter(getContext());
 
+        recyclerView.addItemDecoration(new RecyclerAdvanceDecoration(getContext(), OrientationHelper.VERTICAL));
+
+        swipeRefreshLayout.setProgressBackgroundColorSchemeResource(android.R.color.white);
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light,
+                android.R.color.holo_red_light, android.R.color.holo_orange_light,
+                android.R.color.holo_green_light);
+
         //轮播图头布局
         final View headView = LayoutInflater.from(getContext()).inflate(R.layout.wraprecycler_headview, null);
         customBanner = (BGABanner) headView.findViewById(R.id.banner_main_cube);
-
+        recyclerView.addHeaderView(headView);
         //Banner轮播图实现
-        customViews = getViews(6);
+        customViews = getViews(7);
         customBanner.setViews(customViews);
 
         NetTool.getInstance().startRequest(NetUtil.NEWEST_RECYCLER, CarouselBean.class, new OnHttpCallBack<CarouselBean>() {
@@ -77,7 +92,7 @@ public class NewFragment extends BaseFragment {
                         public void onClick(View v) {
                             Intent intent = new Intent(getContext(), CarouselActivity.class);
                             Bundle bundle = new Bundle();
-                            bundle.putParcelable("params",data);
+                            bundle.putParcelable("params", data);
                             intent.putExtras(bundle);
                             startActivity(intent);
                         }
@@ -110,7 +125,54 @@ public class NewFragment extends BaseFragment {
             public void onError(Throwable e) {
             }
         });
-        recyclerView.addHeaderView(headView);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                NetTool.getInstance().startRequest(NetUtil.NEWEST, NewBean.class, new OnHttpCallBack<NewBean>() {
+                    @Override
+                    public void onSuccess(NewBean response) {
+                        adapter.addItem(response);
+                        adapter.notifyDataSetChanged();
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+                });
+            }
+        });
+
+        //RecyclerView滑动监听
+        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(final RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if ( lastVisibleItem  == adapter.getItemCount()) {
+                    NetTool.getInstance().startRequest("http://app.vmoiver.com/apiv3/post/getPostByTab?p=" + NewAdapter.countP + "&size=20&tab=latest", NewBean.class, new OnHttpCallBack<NewBean>() {
+                        @Override
+                        public void onSuccess(NewBean response) {
+
+                            Log.d("NewFragment", "---->+++++++++");
+                            adapter.addMoreItem(response);
+                            adapter.notifyDataSetChanged();
+                            //recyclerView.setAdapter(adapter);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                lastVisibleItem = manager.findLastVisibleItemPosition();
+            }
+        });
     }
 
     private List<View> getViews(int count) {

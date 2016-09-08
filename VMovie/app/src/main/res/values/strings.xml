@@ -17,5 +17,22 @@
     <string name="check_al">查看全部</string>
     <string name="video_is_playing">正在播放</string>
     <string name="ellipsis">\u2026</string>
+    <string name="clear_data">清空数据</string>
+    <string name="setting">设置</string>
+    <string name="play_setting">播放设置</string>
+    <string name="version_update">版本更新</string>
+    <string name="v5_0_9_build_99">V5.0.9(Build 99)</string>
+    <string name="user_feedback">用户反馈</string>
+    <string name="open_use_change_play">开启后,应用将切换成备用播放器。</string>
+    <string name="more_helper">更多帮助</string>
+    <string name="play_debug_model">播放器调试模式</string>
+    <string name="clear_picture_cache">清除图片缓存</string>
+    <string name="allow_no_wifi">允许非WIFI网络下载</string>
+    <string name="back">退出</string>
+    <string name="unWIFI_cache_setting">离线缓存路径设置</string>
+    <string name="phone_store">手机存储</string>
+    <string name="cancle">取消</string>
+    <string name="please_input_key">请输入要搜索的内容</string>
+    <string name="search_detail">搜索详情</string>
 
 </resources>

@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/new_relative_video"
         android:layout_width="match_parent"
         android:layout_height="@dimen/two_hundred_three_dp">
 
@@ -53,8 +54,7 @@
                 android:layout_width="@dimen/fifteen_dp"
                 android:layout_height="@dimen/fifteen_dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/thirty_dp"
-                android:background="@mipmap/side_likes" />
+                android:layout_marginLeft="@dimen/thirty_dp" />
 
             <TextView
                 android:id="@+id/new_detail_tv_like"

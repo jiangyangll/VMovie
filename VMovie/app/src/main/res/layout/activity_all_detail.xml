@@ -23,8 +23,7 @@
             android:layout_width="14dp"
             android:layout_height="14dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="30dp"
-            android:background="@mipmap/side_likes"/>
+            android:layout_marginLeft="30dp" />
 
         <TextView
             android:id="@+id/tv_count_like"
