@@ -1,11 +1,17 @@
 package com.example.dllo.vmovie;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Handler.Callback;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AlertDialog.Builder;
 import android.view.Gravity;
 
 import android.view.MotionEvent;
@@ -13,9 +19,12 @@ import android.view.MotionEvent;
 import android.view.KeyEvent;
 
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import android.widget.RelativeLayout;
@@ -26,6 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
 import com.example.dllo.vmovie.base.BaseActivity;
 import com.example.dllo.vmovie.backstage.fragment.BackStageFragment;
 import com.example.dllo.vmovie.like.LikeActivity;
@@ -36,13 +46,21 @@ import com.example.dllo.vmovie.setting.SettingActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends BaseActivity implements OnTouchListener {
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
+
+
+public class MainActivity extends BaseActivity implements OnTouchListener, OnClickListener {
 
     private DrawerLayout drawerLayout;
     private ImageView clickDrawer, clickSearch;
-    private RelativeLayout relativeDrawer, relativeDrawerHome, relativeDrawerSeries, relativeDrawerBehind, relativeDrawerLike;
-    private ImageView ivHomeBlank, ivSeriesBlank, ivBehindBlank, ivHomepage, ivSeries, ivBehind, ivSetting;
-    private TextView tvHomePage, tvSeries, tvBehind;
+
+    private RelativeLayout  relativeDrawerLike;
+    private ImageView  ivSetting;
+
+    private RelativeLayout relativeDrawer, relativeDrawerHome, relativeDrawerSeries, relativeDrawerBehind;
+    private ImageView ivHomeBlank, ivSeriesBlank, ivBehindBlank, ivHomepage, ivSeries, ivBehind, ivDrawerLogin, ivSideClose;
+    private TextView tvHomePage, tvSeries, tvBehind, tvClickLogin;
+    private AlertDialog mDialog;
 
     @Override
     public int setLayout() {
@@ -52,7 +70,7 @@ public class MainActivity extends BaseActivity implements OnTouchListener {
     @Override
     protected void initView() {
         relativeDrawer = (RelativeLayout) findViewById(R.id.relative_drawer);
-        relativeDrawer.setAlpha(255);
+
         relativeDrawerHome = (RelativeLayout) findViewById(R.id.relative_drawer_homepage);
         relativeDrawerSeries = (RelativeLayout) findViewById(R.id.relative_drawer_series);
         relativeDrawerBehind = (RelativeLayout) findViewById(R.id.relative_drawer_behind);
@@ -74,6 +92,12 @@ public class MainActivity extends BaseActivity implements OnTouchListener {
         tvHomePage = (TextView) findViewById(R.id.tv_drawer_homepage);
         tvSeries = (TextView) findViewById(R.id.tv_drawer_series);
         tvBehind = (TextView) findViewById(R.id.tv_drawer_behind);
+        ivSideClose = (ImageView) findViewById(R.id.iv_side_close);
+        ivSideClose.setOnClickListener(this);
+
+        ivDrawerLogin = (ImageView) findViewById(R.id.iv_drawer_head_icon);
+        tvClickLogin = (TextView) findViewById(R.id.tv_drawer_click_login);
+        ivDrawerLogin.setOnClickListener(this);
         relativeDrawerHome.setOnTouchListener(this);
         relativeDrawerSeries.setOnTouchListener(this);
         relativeDrawerBehind.setOnTouchListener(this);
@@ -87,10 +111,13 @@ public class MainActivity extends BaseActivity implements OnTouchListener {
 
     @Override
     protected void initData() {
+        mDialog = createDialog();
         clickDrawer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 drawerLayout.openDrawer(Gravity.LEFT);
+                Animation scale = AnimationUtils.loadAnimation(MainActivity.this, R.anim.expand_anim);
+                ivSideClose.startAnimation(scale);
             }
         });
 
@@ -242,4 +269,84 @@ public class MainActivity extends BaseActivity implements OnTouchListener {
             System.exit(0);
         }
     }
+
+
+            Handler mHandler = new Handler(new Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            drawerLayout.closeDrawer(relativeDrawer);
+            return false;
+        }
+    });
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_drawer_head_icon:
+                if (VMovieApplication.LOGIN_STATE == true) {
+                    mDialog.show();
+                } else {
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivityForResult(intent, 100);
+                }
+                break;
+            case R.id.iv_side_close:
+                Animation scale = AnimationUtils.loadAnimation(MainActivity.this, R.anim.scale_anim);
+                scale.setFillAfter(true);
+                ivSideClose.startAnimation(scale);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        mHandler.sendEmptyMessage(0);
+                    }
+                }).start();
+                break;
+        }
+    }
+
+    private AlertDialog createDialog() {
+        AlertDialog.Builder builder = new Builder(this);
+        builder.setTitle("提示");
+        builder.setMessage("确定退出登录?");
+        builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                VMovieApplication.LOGIN_STATE = false;
+                ivDrawerLogin.setImageResource(R.mipmap.default_avatar);
+                tvClickLogin.setText("点击登录");
+            }
+        });
+        builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+        builder.setCancelable(false);
+        AlertDialog dialog = builder.create();
+        return dialog;
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == 200) {
+            tvClickLogin.setText(data.getStringExtra("userName"));
+            Glide.with(this).load(data.getStringExtra("headIcon")).bitmapTransform(new
+                    CropCircleTransformation(this)).into(ivDrawerLogin);
+        } else if (requestCode == 100 && resultCode == 300) {
+            tvClickLogin.setText(data.getStringExtra("userName"));
+            Glide.with(this).load(data.getStringExtra("headIcon")).bitmapTransform(new
+                    CropCircleTransformation(this)).into(ivDrawerLogin);
+        }
+    }
+
+
 }

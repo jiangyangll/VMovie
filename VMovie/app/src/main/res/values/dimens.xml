@@ -36,12 +36,20 @@
     <dimen name="sixty_dp">60dp</dimen>
     <dimen name="eight_dp">8dp</dimen>
     <dimen name="two_hundred_three_dp">203dp</dimen>
+
     <dimen name="forty_five">45dp</dimen>
     <dimen name="four_dp">4dp</dimen>
     <dimen name="sixty_five_dp">65dp</dimen>
     <dimen name="one_hundred_one_dp">110dp</dimen>
     <dimen name="one_dp">1dp</dimen>
     <dimen name="one_hundred_twenty_dp">120dp</dimen>
-    <dimen name="three_hundred_dp">300dp</dimen>
     <dimen name="four_hundred_twenty_dp">420dp</dimen>
+
+    <dimen name="two_hundred_forty_dp">240dp</dimen>
+    <dimen name="two_hundred_sixty_dp">260dp</dimen>
+    <dimen name="two_hundred_seventy_dp">270dp</dimen>
+    <dimen name="two_hundred_eighty_five_dp">285dp</dimen>
+    <dimen name="three_hundred_dp">300dp</dimen>
+    <dimen name="one_hundred_eighty_dp">180dp</dimen>
+    <dimen name="eighteen_sp">18sp</dimen>
 </resources>

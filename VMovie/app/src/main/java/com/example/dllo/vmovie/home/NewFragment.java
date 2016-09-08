@@ -70,7 +70,9 @@ public class NewFragment extends BaseFragment {
         customBanner = (BGABanner) headView.findViewById(R.id.banner_main_cube);
         recyclerView.addHeaderView(headView);
         //Banner轮播图实现
+
         customViews = getViews(7);
+
         customBanner.setViews(customViews);
 
         NetTool.getInstance().startRequest(NetUtil.NEWEST_RECYCLER, CarouselBean.class, new OnHttpCallBack<CarouselBean>() {

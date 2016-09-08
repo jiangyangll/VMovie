@@ -115,12 +115,6 @@ public class CommentAdapter extends BaseExpandableListAdapter {
 
         childViewHolder.childReplyUserNameTv.setText("回复" + bean.getData().get(groupPosition).getSubcomment().get(childPosition).getReply_userinfo().getUsername() + ":  " + bean.getData().get(groupPosition).getSubcomment().get(childPosition).getContent());
 
-//        String addChildTime = bean.getData().get(groupPosition).getSubcomment().get(childPosition).getAddtime();
-//        int b = Integer.valueOf(addChildTime);
-//        Date date = new Date(b * 1000L);
-//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-//        String childTime = dateFormat.format(dateFormat);
-//        childViewHolder.childAddTimeTv.setText(childTime);
 
         childViewHolder.childCountApproveTv.setText(bean.getData().get(groupPosition).getSubcomment().get(childPosition).getCount_approve());
 

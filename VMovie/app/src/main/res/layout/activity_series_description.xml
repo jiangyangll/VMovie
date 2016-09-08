@@ -27,6 +27,7 @@
         android:layout_alignParentLeft="true"
         />
     <ImageView
+        android:id="@+id/iv_series_description_share"
         android:layout_width="@dimen/twenty_five_dp"
         android:layout_height="@dimen/twenty_five_dp"
         android:background="@mipmap/video_lan_share"
@@ -203,6 +204,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent">
             <LinearLayout
+                android:id="@+id/linear_series_description_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"

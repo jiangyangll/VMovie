@@ -18,6 +18,8 @@ public class NetUtil {
     public static final String CHANNEl = "http://app.vmoiver.com/apiv3/cate/getList";
     //系列
     public static final String SERIES_START = "http://app.vmoiver.com/apiv3/series/getList?page=1&size=10&p=1";
+    // 系列刷新
+    public static final String SERIES_REFRESH = "http://app.vmoiver.com/apiv3/series/getList?page=1&size=10&p=";
     //幕后标题
     public static final String BACKSTAGE
             = "http://app.vmoiver.com/apiv3/backstage/getCate";

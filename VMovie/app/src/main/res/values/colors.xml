@@ -13,7 +13,18 @@
     <color name="gray_dSix">#d6d6d6</color>
     <color name="trans_black">#7f000000</color>
     <color name="light_gray">#E7E7E7</color>
+
+    <color name="firstColor">#38ADFF</color>
+    <color name="secondColor">#FF4444</color>
+    <color name="thirdColor">#B6DA53</color>
+    <color name="forthColor">#00FFFF</color>
+
     <color name="e_three_blue">#e3fffe</color>
+
     <color name="halving_line">#dcdcdc</color>
     <color name="gray_ea">#eaeaea</color>
+
+    <color name="bg_white">#FFFFFF</color>
+    <color name="bg_gray">#C5C9CC</color>
+    <color name="font_gray">#A6AFC6</color>
 </resources>

@@ -11,6 +11,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 public class VMovieApplication extends Application{
 
     protected static Context context;
+    public static Boolean LOGIN_STATE = false;
 
     public static Context getContext() {
         return context;
