@@ -69,20 +69,21 @@
                     android:layout_marginTop="@dimen/fifteen_dp"
                     android:layout_marginRight="@dimen/fifteen_dp"
                     >
-                    <ImageView
-                        android:id="@+id/iv_series_description_attention"
+                    <CheckBox
+                        android:id="@+id/cb_series_description_attention"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@mipmap/attention"
+                        android:background="@drawable/selector_subscribe"
                         android:layout_alignParentRight="true"
                         android:layout_gravity="center_horizontal"
+                        android:button="@null"
                         />
                     <TextView
                         android:id="@+id/tv_series_description_count_follow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/darker_gray"
-                        android:layout_below="@+id/iv_series_description_attention"
+                        android:layout_below="@+id/cb_series_description_attention"
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="@dimen/five_dp"
                         />

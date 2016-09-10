@@ -41,6 +41,7 @@ import com.example.dllo.vmovie.backstage.fragment.BackStageFragment;
 import com.example.dllo.vmovie.like.LikeActivity;
 import com.example.dllo.vmovie.search.SearchActivity;
 import com.example.dllo.vmovie.series.SeriesFragment;
+import com.example.dllo.vmovie.series.SubscribeActivity;
 import com.example.dllo.vmovie.setting.SettingActivity;
 
 import java.util.Timer;
@@ -54,11 +55,12 @@ public class MainActivity extends BaseActivity implements OnTouchListener, OnCli
     private DrawerLayout drawerLayout;
     private ImageView clickDrawer, clickSearch;
 
-    private RelativeLayout  relativeDrawerLike;
-    private ImageView  ivSetting;
+    private RelativeLayout relativeDrawerLike;
+    private ImageView ivSetting;
 
     private RelativeLayout relativeDrawer, relativeDrawerHome, relativeDrawerSeries, relativeDrawerBehind;
-    private ImageView ivHomeBlank, ivSeriesBlank, ivBehindBlank, ivHomepage, ivSeries, ivBehind, ivDrawerLogin, ivSideClose;
+    private ImageView ivHomeBlank, ivSeriesBlank, ivBehindBlank, ivHomepage, ivSeries, ivBehind, ivDrawerLogin, ivSideClose
+            , ivDrawerSubscribe;
     private TextView tvHomePage, tvSeries, tvBehind, tvClickLogin;
     private AlertDialog mDialog;
 
@@ -93,6 +95,8 @@ public class MainActivity extends BaseActivity implements OnTouchListener, OnCli
         tvSeries = (TextView) findViewById(R.id.tv_drawer_series);
         tvBehind = (TextView) findViewById(R.id.tv_drawer_behind);
         ivSideClose = (ImageView) findViewById(R.id.iv_side_close);
+        ivDrawerSubscribe = (ImageView) findViewById(R.id.iv_drawer_my_subscribe);
+        ivDrawerSubscribe.setOnClickListener(this);
         ivSideClose.setOnClickListener(this);
 
         ivDrawerLogin = (ImageView) findViewById(R.id.iv_drawer_head_icon);
@@ -306,6 +310,10 @@ public class MainActivity extends BaseActivity implements OnTouchListener, OnCli
                         mHandler.sendEmptyMessage(0);
                     }
                 }).start();
+                break;
+            case R.id.iv_drawer_my_subscribe:
+                Intent intent = new Intent(MainActivity.this, SubscribeActivity.class);
+                startActivity(intent);
                 break;
         }
     }
