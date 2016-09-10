@@ -58,7 +58,6 @@ public class SeriesFragment extends BaseFragment {
                 // 待定
                 refreshData(response);
                 seriesAdapter.setDataBeanList(dataBeanList);
-
                 recyclerSeries.setAdapter(seriesAdapter);
 
             }
@@ -164,5 +163,11 @@ public class SeriesFragment extends BaseFragment {
             dataBean.setWeekly(seriesBean.getData().get(i).getWeekly());
             dataBeanList.add(dataBean);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        seriesAdapter.notifyDataSetChanged();
     }
 }

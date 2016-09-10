@@ -62,6 +62,7 @@
         <activity android:name=".series.SeriesDesActivity" />
 
         <activity android:name=".LoginActivity"/>
+        <activity android:name=".series.SubscribeActivity"/>
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"

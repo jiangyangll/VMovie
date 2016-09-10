@@ -31,14 +31,15 @@
             android:layout_marginLeft="@dimen/fifteen_dp"
             android:layout_marginTop="@dimen/five_dp"
             />
-        <ImageView
-            android:id="@+id/iv_series_item_add_subscribe"
+        <CheckBox
+            android:id="@+id/checkbox_series_item_add_subscribe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/attention"
+            android:background="@drawable/selector_subscribe"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/fifteen_dp"
+            android:button="@null"
             />
     </RelativeLayout>
     <TextView

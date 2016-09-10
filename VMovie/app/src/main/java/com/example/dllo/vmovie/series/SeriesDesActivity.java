@@ -8,16 +8,20 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.dllo.vmovie.R;
 import com.example.dllo.vmovie.base.BaseActivity;
 import com.example.dllo.vmovie.customview.GrapListView;
+import com.example.dllo.vmovie.dbtool.DaoTools;
+import com.example.dllo.vmovie.dbtool.SubScribeBean;
 import com.example.dllo.vmovie.netutil.NetUtil;
 import com.example.dllo.vmovie.okhttptool.NetTool;
 import com.example.dllo.vmovie.okhttptool.OnHttpCallBack;
@@ -50,6 +54,7 @@ public class SeriesDesActivity extends BaseActivity implements OnClickListener {
     private int fromPositon;
     private int clickFromPosition;
     private int clickPosition;
+    private CheckBox cbAttention;
 
     @Override
     public int setLayout() {
@@ -77,6 +82,7 @@ public class SeriesDesActivity extends BaseActivity implements OnClickListener {
         tvCommentCount = (TextView) findViewById(R.id.tv_series_description_count_comment);
         ivSeriesDescShare = (ImageView) findViewById(R.id.iv_series_description_share);
         linearShare = (LinearLayout) findViewById(R.id.linear_series_description_share);
+        cbAttention = (CheckBox) findViewById(R.id.cb_series_description_attention);
         linearShare.setOnClickListener(this);
         ivSeriesDescShare.setOnClickListener(this);
         ivBack.setOnClickListener(this);
@@ -85,9 +91,31 @@ public class SeriesDesActivity extends BaseActivity implements OnClickListener {
 
     @Override
     protected void initData() {
+
         ShareSDK.initSDK(this);
         Intent intent = getIntent();
-        String seriesId = intent.getStringExtra("seriesId");
+        final String seriesId = intent.getStringExtra("seriesId");
+        if (DaoTools.getInstance().isSava(seriesId)) {
+            cbAttention.setChecked(true);
+        }else {
+            cbAttention.setChecked(false);
+        }
+        cbAttention.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (DaoTools.getInstance().isSava(seriesId)) {
+                    DaoTools.getInstance().deleteSubScribeBySeriesId(seriesId);
+                    Toast.makeText(SeriesDesActivity.this, "取消成功!", Toast.LENGTH_SHORT).show();
+                    cbAttention.setChecked(false);
+                }else {
+                    SubScribeBean subScribeBean = new SubScribeBean();
+                    subScribeBean.setSeriesId(seriesId);
+                    DaoTools.getInstance().insertSubScribe(subScribeBean);
+                    Toast.makeText(SeriesDesActivity.this, "订阅成功!", Toast.LENGTH_SHORT).show();
+                    cbAttention.setChecked(true);
+                }
+            }
+        });
         String url = NetUtil.SERIES_DETAIL_LEFT + seriesId + NetUtil.SERIES_DETAIL_RIGHT;
         final MediaController mediaController = new MediaController(this);
         fromAdapter = new SeriesDescFromAdapter(this);
