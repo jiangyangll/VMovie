@@ -63,7 +63,6 @@ public class NetUtil {
     public static final String CHANNEL_DETAIL_LEFT = "http://app.vmoiver.com/apiv3/post/getPostInCate?cateid=";
     public static final String CHANNEL_DETAIL_RIGHT = "&p=1";
 
-
     //视频详情
     //http://app.vmoiver.com/apiv3/series/getVideo?series_postid=1792&p=1
     public static final String VIDEO_LEFT = "http://app.vmoiver.com/apiv3/series/getVideo?series_postid=";
