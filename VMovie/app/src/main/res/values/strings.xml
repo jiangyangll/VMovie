@@ -44,5 +44,6 @@
     <string name="password_login">Password</string>
     <string name="username_login">Email</string>
     <string name="you_are_welcome">You are welcome !</string>
+    <string name="go">GO</string>
 
 </resources>

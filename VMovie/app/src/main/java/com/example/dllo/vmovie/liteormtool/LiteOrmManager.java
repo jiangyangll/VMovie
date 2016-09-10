@@ -80,16 +80,16 @@ public class LiteOrmManager {
 //        return liteOrm.query(new QueryBuilder<T>(tClass).where(field + "?=", t));
 //    }
 
-    /**
-            * 查询  某字段 等于 Value的值
-    * @param cla
-    * @param field
-    * @param value
-    * @return
-            */
-    public <T> List<T> getQueryByWhere(Class<T> cla, String field, String[] value) {
-        return liteOrm.<T>query(new QueryBuilder(cla).where(field + "=?", value));
-    }
+//    /**
+//            * 查询  某字段 等于 Value的值
+//    * @param cla
+//    * @param field
+//    * @param value
+//    * @return
+//            */
+//    public <T> List<T> getQueryByWhere(Class<T> cla, String field, String[] value) {
+//        return liteOrm.<T>query(new QueryBuilder(cla).where(field + "=?", value));
+//    }
 
     //查询是否有值,有则返回true
     public <T> List<T> queryByWhereValue(Class<T> tClass, String field, T t) {

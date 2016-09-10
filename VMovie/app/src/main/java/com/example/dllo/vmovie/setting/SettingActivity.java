@@ -34,7 +34,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private RelativeLayout clearCacheRL, settingPlayRL, versionUpdateRL, settingStorageRL;
     private Switch allowWIFISwitch;
     private TextView cacheTextView;
-    private Button backBtn;
 
     private PopupWindow popupWindow;
     private TextView haveSDK, countPhoneSize, settingStorageContent;
@@ -50,7 +49,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void initView() {
         backImg = (ImageView) findViewById(R.id.setting_back);
-        backBtn = (Button) findViewById(R.id.setting_user_back);
         cacheTextView = (TextView) findViewById(R.id.setting_cache_textView);
         allowWIFISwitch = (Switch) findViewById(R.id.setting_allowWIFI_switch);
         clearCacheRL = (RelativeLayout) findViewById(R.id.setting_clear_cache_rl);
@@ -88,7 +86,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             e.printStackTrace();
         }
 
-        backBtn.setOnClickListener(this);
         backImg.setOnClickListener(this);
 
         allowWIFISwitch.setOnClickListener(new View.OnClickListener() {
@@ -147,10 +144,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.setting_user_back:
-
-                break;
-
             case R.id.setting_back:
                 SettingActivity.this.finish();
                 break;

@@ -18,9 +18,9 @@ public class DaoTools {
     private LikeBackStageBeanDao backStageBeanDao;
     private LikeFilmBeanDao filmBeanDao;
 
-    public static DaoTools getInstance(){
+    public static DaoTools getInstance() {
         if (ourInstance == null) {
-            synchronized (DaoTools.class){
+            synchronized (DaoTools.class) {
                 if (ourInstance == null) {
                     ourInstance = new DaoTools();
                 }
@@ -32,46 +32,62 @@ public class DaoTools {
         return ourInstance;
     }
 
-    private DaoTools(){
+    private DaoTools() {
 
     }
 
-    public void insertSubScribe(SubScribeBean subScribeBean){
+    public void insertSubScribe(SubScribeBean subScribeBean) {
         scribeBeanDao.insert(subScribeBean);
     }
 
-    public void deleteSubScribe(SubScribeBean subScribeBean){
+    public void deleteSubScribe(SubScribeBean subScribeBean) {
         scribeBeanDao.delete(subScribeBean);
     }
 
-    public void deleteSubScribeBySeriesId(String seriesId){
+    public void deleteSubScribeBySeriesId(String seriesId) {
         org.greenrobot.greendao.query.QueryBuilder<SubScribeBean> queryBuilder = scribeBeanDao.queryBuilder();
         DeleteQuery<SubScribeBean> deleteQuery = queryBuilder.where(Properties.SeriesId.eq(seriesId)).buildDelete();
         deleteQuery.executeDeleteWithoutDetachingEntities();
     }
 
-    public List<SubScribeBean> getAllSubscribe(){
+    public List<SubScribeBean> getAllSubscribe() {
         List<SubScribeBean> list = scribeBeanDao.queryBuilder().list();
         return list;
     }
 
-    public boolean isSava(String seriesId){
+    public boolean isSava(String seriesId) {
         QueryBuilder<SubScribeBean> queryBuilder = scribeBeanDao.queryBuilder().where(Properties.SeriesId.eq(seriesId));
         long size = queryBuilder.buildCount().count();
-        return size > 0 ? true :false;
+        return size > 0 ? true : false;
     }
 
-    public boolean isSavaFilm(String title){
+    public void insertFilmBean(LikeFilmBean likeFilmBean) {
+        filmBeanDao.insert(likeFilmBean);
+    }
+
+    public void deleteFilmBean(LikeFilmBean likeFilmBean) {
+        filmBeanDao.delete(likeFilmBean);
+    }
+
+    public void insertBackStage(LikeBackStageBean backStageBean) {
+        backStageBeanDao.insert(backStageBean);
+    }
+
+    public void deleteBackStage(LikeBackStageBean backStageBean) {
+        backStageBeanDao.delete(backStageBean);
+    }
+
+    public boolean isSavaFilm(String title) {
         QueryBuilder<LikeFilmBean> queryBuilder = filmBeanDao.queryBuilder()
                 .where(LikeFilmBeanDao.Properties.Title.eq(title));
         long size = queryBuilder.buildCount().count();
-        return size > 0 ? true :false;
+        return size > 0 ? true : false;
     }
 
-    public boolean isSavaBackStage(String title){
+    public boolean isSavaBackStage(String title) {
         QueryBuilder<LikeBackStageBean> queryBuilder = backStageBeanDao.queryBuilder()
                 .where(LikeBackStageBeanDao.Properties.Title.eq(title));
         long size = queryBuilder.buildCount().count();
-        return size > 0 ? true :false;
+        return size > 0 ? true : false;
     }
 }

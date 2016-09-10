@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.dllo.vmovie.R;
 import com.example.dllo.vmovie.base.BaseActivity;
 import com.example.dllo.vmovie.customview.VerticalSwitchTextView;
+import com.example.dllo.vmovie.dbtool.DaoTools;
 import com.example.dllo.vmovie.like.LikeBackstageBean;
 import com.example.dllo.vmovie.like.LikeFilmBean;
 import com.example.dllo.vmovie.liteormtool.LiteOrmManager;
@@ -21,6 +22,8 @@ import com.example.dllo.vmovie.okhttptool.OnHttpCallBack;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.Vitamio;
 import io.vov.vitamio.widget.MediaController;
@@ -48,6 +51,10 @@ public class ChannelContentActivity extends BaseActivity {
 
     private boolean flag = false;
     private LikeFilmBean filmBean;
+
+    private ChannelContentBean channelContentBean;
+
+    private com.example.dllo.vmovie.dbtool.LikeFilmBean bean;
 
     @Override
     public int setLayout() {
@@ -127,9 +134,17 @@ public class ChannelContentActivity extends BaseActivity {
             }
         });
 
+        shareImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showShare();
+            }
+        });
+
         NetTool.getInstance().startRequest(NetUtil.NEWEST_DETAIL_LEFT + postId + NetUtil.NEWEST_DETAIL_RIGHT, ChannelContentBean.class, new OnHttpCallBack<ChannelContentBean>() {
             @Override
             public void onSuccess(ChannelContentBean response) {
+                channelContentBean = response;
                 String url = response.getData().getContent().getVideo().get(0).getQiniu_url();
 
                 title = response.getData().getTitle();
@@ -149,6 +164,11 @@ public class ChannelContentActivity extends BaseActivity {
                         mediaPlayer.setPlaybackSpeed(1.0f);
                     }
                 });
+
+                if (DaoTools.getInstance().isSavaFilm(title)) {
+                    flag = true;
+                    likeImage.setImageResource(R.mipmap.like_image);
+                }
             }
 
             @Override
@@ -162,12 +182,16 @@ public class ChannelContentActivity extends BaseActivity {
                 if (!flag) {
                     likeImage.setImageResource(R.mipmap.like_image);
                     filmBean = new LikeFilmBean(title, duration, shareNum, ratingNum, imageUrl, postId);
+                    bean = new com.example.dllo.vmovie.dbtool.LikeFilmBean();
+                    bean.setTitle(title);
                     LiteOrmManager.getInstance().insert(filmBean);
+                    DaoTools.getInstance().insertFilmBean(bean);
                     Toast.makeText(ChannelContentActivity.this, "有品位~", Toast.LENGTH_SHORT).show();
                     flag = true;
                 } else {
                     likeImage.setImageResource(R.mipmap.side_likes);
                     LiteOrmManager.getInstance().delete(filmBean);
+                    DaoTools.getInstance().deleteFilmBean(bean);
                     Toast.makeText(ChannelContentActivity.this, "品位变了~", Toast.LENGTH_SHORT).show();
                     flag = false;
                 }
@@ -176,5 +200,36 @@ public class ChannelContentActivity extends BaseActivity {
 
         list = new ArrayList<>(Arrays.asList("无线你的无限  英特尔", "世界因为不同", "只要有梦想  凡事可成真", "世界因你而广阔", "极速炫彩  掌控天下  霸气十足", "天下有双  驰骋世界", "人生本有无数可能 让可能变成现实", "俯视天下  智握巅峰", "奇迹世界  由你掌控"));
         vsTv.setTextContent(list);
+    }
+
+    private void showShare() {
+        ShareSDK.initSDK(this);
+        OnekeyShare oks = new OnekeyShare();
+        //关闭sso授权
+        oks.disableSSOWhenAuthorize();
+
+        // 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
+        //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
+        // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+        oks.setTitle(channelContentBean.getData().getTitle());
+        // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+        oks.setTitleUrl(channelContentBean.getData().getShare_sub_title());
+        // text是分享文本，所有平台都需要这个字段
+        oks.setText(channelContentBean.getData().getTitle());
+        //分享网络图片，新浪微博分享网络图片需要通过审核后申请高级写入接口，否则请注释掉测试新浪微博
+        oks.setImageUrl(channelContentBean.getData().getImage());
+        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+        //oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+        // url仅在微信（包括好友和朋友圈）中使用
+        oks.setUrl(channelContentBean.getData().getShare_link().getWeixin());
+        // comment是我对这条分享的评论，仅在人人网和QQ空间使用
+        oks.setComment("挺不错哦!!!");
+        // site是分享此内容的网站名称，仅在QQ空间使用
+        oks.setSite("V电影");
+        // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+        oks.setSiteUrl(channelContentBean.getData().getShare_link().getQzone());
+
+        // 启动分享GUI
+        oks.show(this);
     }
 }

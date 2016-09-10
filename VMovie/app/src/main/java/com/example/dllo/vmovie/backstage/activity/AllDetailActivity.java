@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.example.dllo.vmovie.R;
 import com.example.dllo.vmovie.backstage.bean.AllDetailBean;
 import com.example.dllo.vmovie.base.BaseActivity;
+import com.example.dllo.vmovie.dbtool.DaoTools;
+import com.example.dllo.vmovie.dbtool.LikeBackStageBean;
 import com.example.dllo.vmovie.like.LikeBackstageBean;
 import com.example.dllo.vmovie.liteormtool.LiteOrmManager;
 import com.example.dllo.vmovie.netutil.NetUtil;
@@ -43,6 +45,8 @@ public class AllDetailActivity extends BaseActivity implements OnClickListener {
 
     private boolean flag = false;
     private LikeBackstageBean backstageBean;
+
+    private LikeBackStageBean bean;
 
     @Override
     public int setLayout() {
@@ -96,6 +100,11 @@ public class AllDetailActivity extends BaseActivity implements OnClickListener {
                 shareNum = response.getData().getCount_share();
                 likeNum = response.getData().getCount_like();
                 imageUrl = response.getData().getImage();
+
+                if (DaoTools.getInstance().isSavaBackStage(title)) {
+                    flag = true;
+                    image_side_likes.setImageResource(R.mipmap.like_image);
+                }
             }
 
             @Override
@@ -121,12 +130,16 @@ public class AllDetailActivity extends BaseActivity implements OnClickListener {
                 if (!flag) {
                     image_side_likes.setImageResource(R.mipmap.like_image);
                     backstageBean = new LikeBackstageBean(postId, title, imageUrl, shareNum, likeNum);
+                    bean = new LikeBackStageBean();
+                    bean.setTitle(title);
                     LiteOrmManager.getInstance().insert(backstageBean);
+                    DaoTools.getInstance().insertBackStage(bean);
                     Toast.makeText(this, "有品位~", Toast.LENGTH_SHORT).show();
                     flag = true;
                 } else {
                     image_side_likes.setImageResource(R.mipmap.side_likes);
                     LiteOrmManager.getInstance().delete(backstageBean);
+                    DaoTools.getInstance().deleteBackStage(bean);
                     Toast.makeText(this, "品位变了~", Toast.LENGTH_SHORT).show();
                     flag = false;
                 }
